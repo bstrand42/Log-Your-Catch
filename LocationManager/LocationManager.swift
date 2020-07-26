@@ -80,7 +80,7 @@ final class LocationManager: NSObject {
             return
         }
         
-        self.reverseGeoCoding(location: lastLocation)
+        //self.reverseGeoCoding(location: lastLocation)
         lastLocation = nil
     }
     
@@ -123,7 +123,7 @@ final class LocationManager: NSObject {
         setupLocationManager()
     }
     
-    
+    /*
     /// Get Reverse Geocoded Placemark address by passing CLLocation
     ///
     /// - Parameters:
@@ -243,7 +243,7 @@ final class LocationManager: NSObject {
             }
         })
     }
-       
+    */
     //MARK:- Final closure/callback
     private func didComplete(location: CLLocation?,error: NSError?) {
         locationManager?.stopUpdatingLocation()
