@@ -53,7 +53,16 @@ class ViewController: UIViewController {
     }
     
     //MARK:- IBActions
-
+    
+    
+    //temporary function and button to test Login and Register
+    @IBAction func forceLogin(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "goToLoginView", sender: self)
+        
+    }
+    
+    
 
     @IBAction func showCurrentLocationOnMap(_ sender: AnyObject) {
         //self.resetLabels()
@@ -66,9 +75,12 @@ class ViewController: UIViewController {
             guard let location = location else {
                 return
             }
+            
+            print(location)
 
             let mapVC = self.storyboard?.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
-            
+            print("mapVC = \(String(describing: mapVC))")
+            print("mapVC.location = \(String(describing: mapVC.location))")
             mapVC.location = location
         }
     }
