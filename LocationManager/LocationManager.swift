@@ -55,8 +55,9 @@ final class LocationManager: NSObject {
         locationManager = CLLocationManager()
         locationManager?.desiredAccuracy = locationAccuracy
         locationManager?.delegate = self
+        print("before authorization request")
         locationManager?.requestWhenInUseAuthorization()
-        
+        print("after authorization request")
     }
     
     private func destroyLocationManager() {
@@ -121,6 +122,7 @@ final class LocationManager: NSObject {
         self.locationCompletionHandler = completionHandler
         
         setupLocationManager()
+        
     }
     
     /*

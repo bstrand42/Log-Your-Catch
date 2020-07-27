@@ -54,36 +54,11 @@ class ViewController: UIViewController {
     
     //MARK:- IBActions
 
-    @IBAction func getCurrentLocationButtonPressed(_ sender: AnyObject) {
-        
-        //self.resetLabels()
-
-        LocationManager.shared.getLocation { (location:CLLocation?, error:NSError?) in
-            
-            if error != nil {
-                self.alertMessage(message: (error?.localizedDescription)!, buttonText: "OK", completionHandler: nil)
-                return
-            }
-            guard let location = location else {
-                self.alertMessage(message: "Unable to fetch location", buttonText: "OK", completionHandler: nil)
-                return
-            }
-            print("lat = \(location.coordinate.latitude)")
-            print("long = \(location.coordinate.longitude)")
-            //self.latitudeLabel.text = "\(location.coordinate.latitude)"
-            //self.longitudeLabel.text = "\(location.coordinate.longitude)"
-            self.currentLatitude = location.coordinate.latitude
-            self.currentLongitude = location.coordinate.longitude
-
-        }
-    }
 
     @IBAction func showCurrentLocationOnMap(_ sender: AnyObject) {
-        
         //self.resetLabels()
 
         LocationManager.shared.getLocation { (location:CLLocation?, error:NSError?) in
-            
             if error != nil {
                 self.alertMessage(message: (error?.localizedDescription)!, buttonText: "OK", completionHandler: nil)
                 return
@@ -91,9 +66,10 @@ class ViewController: UIViewController {
             guard let location = location else {
                 return
             }
+
             let mapVC = self.storyboard?.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+            
             mapVC.location = location
-            self.navigationController?.pushViewController(mapVC, animated: true)
         }
     }
     
