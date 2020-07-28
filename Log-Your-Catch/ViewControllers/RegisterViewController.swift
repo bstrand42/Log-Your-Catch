@@ -8,6 +8,9 @@
 
 import UIKit
 
+// use user defaults to store (key,value) pairs
+let defaults = UserDefaults.standard
+
 class RegisterViewController: UIViewController {
     
     @IBOutlet weak var emailField1: UITextField!
@@ -17,17 +20,59 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var emailMarker: UIImageView!
     @IBOutlet weak var passwordMarker: UIImageView!
     
+    var saveCredentials = true
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+       
+        print("registerViewController page loaded")
+        
+        if let user = defaults.string(forKey: "User") {
+            print("retrieved user = \(user)")
+        } else {
+            print("no username credentials found")
+        }
+        
+        if let password = defaults.string(forKey: "Password") {
+            print("retrieved user = \(password)")
+        } else {
+            print("no user password credentials found")
+        }
+        
+        
+        
+       
+    }
+    
     @IBAction func textFieldEditingEnded(_ sender: UITextField) {
         
         checkUserInput()
         
     }
     
+    // toggle whether we're to save the user's credentials...defaults to true
+    @IBAction func rememberMeButton(_ sender: Any) {
+        saveCredentials = !saveCredentials
+    }
+    
     
     @IBAction func registerButtonPressed(_ sender: UIButton) {
+        print("registerButtonPressed")
         checkUserInput()
         //execute code to register as a new user using emailField1 and passwordField1
         
+        print("email = \(String(describing: self.emailField1.text))")
+        print("password = \(String(describing: self.passwordField1.text))")
+        
+        if saveCredentials == true {
+            print("would save user credentials here")
+            // TODO: handle the case where either string is nil
+            defaults.set(self.emailField1.text, forKey: "User")
+            defaults.set(self.passwordField1.text, forKey: "Password")
+            print("saved user credentials")
+        }
+
     }
     
     @IBAction func returnToLoginButtonPressed(_ sender: UIButton) {

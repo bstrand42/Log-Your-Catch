@@ -507,6 +507,9 @@
                                                     </label>
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jmP-9G-JzD">
                                                         <rect key="frame" x="157.5" y="22.5" width="158.5" height="31"/>
+                                                        <connections>
+                                                            <action selector="rememberMeButton:" destination="vPz-pk-hy8" eventType="valueChanged" id="xXS-pg-xh6"/>
+                                                        </connections>
                                                     </switch>
                                                 </subviews>
                                             </stackView>
