@@ -19,6 +19,12 @@ class LoginViewController: UIViewController {
         
     }
     
+    @IBAction func registerPressed(_ sender: UIButton) {
+        
+        self.performSegue(withIdentifier: "goToRegisterView", sender: self)
+        
+    }
     
+
     
 }

@@ -26,7 +26,13 @@ class RegisterViewController: UIViewController {
     
     @IBAction func registerButtonPressed(_ sender: UIButton) {
         checkUserInput()
-        //execute code to register as a new user
+        //execute code to register as a new user using emailField1 and passwordField1
+        
+    }
+    
+    @IBAction func returnToLoginButtonPressed(_ sender: UIButton) {
+        
+        self.dismiss(animated: true, completion: nil)
         
     }
     
