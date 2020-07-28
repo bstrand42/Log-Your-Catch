@@ -1,9 +1,8 @@
 //
 //  ViewController.swift
-//  LocationManagerDemo
+//  Log Your Catch
 //
-//  Created by Rajan Maheshwari on 22/10/16.
-//  Copyright © 2016 Rajan Maheshwari. All rights reserved.
+//  Created by Brad Strand on 26/7/20.
 //
 
 import UIKit

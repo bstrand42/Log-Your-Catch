@@ -1,6 +1,8 @@
 //
 //  MapViewController.swift
-//  LocationManagerDemo
+//  Log Your catch
+//
+//  Created by Brad Strand on 26/7/20
 //
 
 import UIKit
