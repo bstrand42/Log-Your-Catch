@@ -92,16 +92,16 @@ class ViewController: UIViewController {
     @IBAction func striperPressed(_ sender: Any) {
         // print("Striper pressed")
         self.fishType = "Striper"
-        maskBluefish.alpha = 0.7
-        maskStriper.alpha = 0.0
+        bluefishButton.alpha = 0.3
+        striperButton.alpha = 1.0
     }
     
     
     @IBAction func bluefishPressed(_ sender: Any) {
         // print("Bluefish pressed")
         self.fishType = "Bluefish"
-        maskStriper.alpha = 0.7
-        maskBluefish.alpha = 0.0
+        striperButton.alpha = 0.3
+        bluefishButton.alpha = 1.0
     }
     
     func uploadToCloud(arr: [CaughtFish]){
@@ -171,8 +171,9 @@ class ViewController: UIViewController {
 */
     @IBOutlet weak var topLogLabel: UILabel!
     @IBOutlet weak var bottomLogLabel: UILabel!
-    @IBOutlet weak var maskStriper: UIImageView!
-    @IBOutlet weak var maskBluefish: UIImageView!
+    @IBOutlet weak var striperButton: UIButton!
+    @IBOutlet weak var bluefishButton: UIButton!
+    
     
     // toggle whether location logging is desired
     @IBAction func loggingButton(_ sender: Any) {
@@ -291,8 +292,8 @@ class ViewController: UIViewController {
             
         }
         
-        maskStriper.alpha = 0.0
-        maskBluefish.alpha = 0.0
+        striperButton.alpha = 1.0
+        bluefishButton.alpha = 1.0
         localRecordCnt += 1
         localRecords.text = "Local records stored: \(localRecordCnt)"
         //print("about to reset fish type")
