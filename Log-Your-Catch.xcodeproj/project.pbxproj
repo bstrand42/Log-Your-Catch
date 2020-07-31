@@ -41,21 +41,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E5238F2A1DBB83D30051907A /* ViewControllers */ = {
+		2201612524D4D1680025A7FE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E582B5EA1DBB817B0002D448 /* Main.storyboard */,
+				E582B5EF1DBB817B0002D448 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E5238F2A1DBB83D30051907A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				E5238F2B1DBB83D30051907A /* MapViewController.swift */,
 				E5238F2C1DBB83D30051907A /* ViewController.swift */,
 			);
-			path = ViewControllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		E562A7DC1DC521EC00FF86F1 /* LocationManager */ = {
+		E562A7DC1DC521EC00FF86F1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				E562A7DD1DC521EC00FF86F1 /* LocationManager.swift */,
+				5DF6755424AAF17600F16731 /* DataModel.xcdatamodeld */,
 			);
-			path = LocationManager;
+			path = Models;
 			sourceTree = SOURCE_ROOT;
 		};
 		E582B5DA1DBB817A0002D448 = {
@@ -77,13 +87,11 @@
 		E582B5E51DBB817B0002D448 /* Log-Your-Catch */ = {
 			isa = PBXGroup;
 			children = (
-				E562A7DC1DC521EC00FF86F1 /* LocationManager */,
-				E5238F2A1DBB83D30051907A /* ViewControllers */,
+				2201612524D4D1680025A7FE /* Views */,
+				E562A7DC1DC521EC00FF86F1 /* Models */,
+				E5238F2A1DBB83D30051907A /* Controllers */,
 				E582B5E61DBB817B0002D448 /* AppDelegate.swift */,
-				E582B5EA1DBB817B0002D448 /* Main.storyboard */,
-				5DF6755424AAF17600F16731 /* DataModel.xcdatamodeld */,
 				E582B5ED1DBB817B0002D448 /* Assets.xcassets */,
-				E582B5EF1DBB817B0002D448 /* LaunchScreen.storyboard */,
 				E582B5F21DBB817B0002D448 /* Info.plist */,
 			);
 			path = "Log-Your-Catch";
