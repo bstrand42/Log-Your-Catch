@@ -14,14 +14,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var latitudeLabel: UILabel!
     @IBOutlet weak var longitudeLabel: UILabel!
     
+    var locationManager = CLLocationManager()
     
-    var len: float_t = 30.0
+    var len: Float = 30.0
+
     var fishType: String = "none"
     var released = true
     var locLogging = true
     var currentLatitude = 0.0
     var currentLongitude = 0.0
+    var currentLocation: CLLocation?
     var localRecordCnt = 0
+    
     
      //singleton of current running context
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -30,11 +34,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        locationManager.delegate = self
+        
         print(FileManager.default.urls(for: .documentDirectory, in:.userDomainMask))
         
         readFish()
         print("viewDidLoad count = \(localRecordCnt)")
         localRecords.text = "Local records stored: \(localRecordCnt)"
+
+        locationManager.requestLocation()
+
     }
 
     func resetLabels() {
@@ -52,48 +61,23 @@ class ViewController: UIViewController {
     }
     
     //MARK:- IBActions
-
-    @IBAction func getCurrentLocationButtonPressed(_ sender: AnyObject) {
+    
+    //temporary function and button to test Login and Register
+    @IBAction func forceLogin(_ sender: UIButton) {
         
-        //self.resetLabels()
-
-        LocationManager.shared.getLocation { (location:CLLocation?, error:NSError?) in
-            
-            if error != nil {
-                self.alertMessage(message: (error?.localizedDescription)!, buttonText: "OK", completionHandler: nil)
-                return
-            }
-            guard let location = location else {
-                self.alertMessage(message: "Unable to fetch location", buttonText: "OK", completionHandler: nil)
-                return
-            }
-            print("lat = \(location.coordinate.latitude)")
-            print("long = \(location.coordinate.longitude)")
-            //self.latitudeLabel.text = "\(location.coordinate.latitude)"
-            //self.longitudeLabel.text = "\(location.coordinate.longitude)"
-            self.currentLatitude = location.coordinate.latitude
-            self.currentLongitude = location.coordinate.longitude
-
-        }
+        performSegue(withIdentifier: "goToLoginView", sender: self)
+        
     }
+    
+    
 
     @IBAction func showCurrentLocationOnMap(_ sender: AnyObject) {
-        
         //self.resetLabels()
-
-        LocationManager.shared.getLocation { (location:CLLocation?, error:NSError?) in
-            
-            if error != nil {
-                self.alertMessage(message: (error?.localizedDescription)!, buttonText: "OK", completionHandler: nil)
-                return
-            }
-            guard let location = location else {
-                return
-            }
-            let mapVC = self.storyboard?.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
-            mapVC.location = location
-            self.navigationController?.pushViewController(mapVC, animated: true)
-        }
+        
+        locationManager.requestLocation()
+        
+        performSegue(withIdentifier: "goToMapView", sender: self)
+        
     }
     
     @IBOutlet weak var lenLabel: UILabel!
@@ -103,16 +87,20 @@ class ViewController: UIViewController {
     @IBAction func striperPressed(_ sender: Any) {
         // print("Striper pressed")
         self.fishType = "Striper"
-        maskBluefish.alpha = 0.7
-        maskStriper.alpha = 0.0
+
+        bluefishButton.alpha = 0.3
+        striperButton.alpha = 1.0
+
     }
     
     
     @IBAction func bluefishPressed(_ sender: Any) {
         // print("Bluefish pressed")
         self.fishType = "Bluefish"
-        maskStriper.alpha = 0.7
-        maskBluefish.alpha = 0.0
+
+        striperButton.alpha = 0.3
+        bluefishButton.alpha = 1.0
+
     }
     
     func uploadToCloud(arr: [CaughtFish]){
@@ -146,12 +134,12 @@ class ViewController: UIViewController {
     
     }
     
-    func roundToHalf(inVal: float_t) -> float_t {
-        var retval: float_t
+    func roundToHalf(inVal: Float) -> Float {
+        var retval: Float
     
         let intPart:Int = Int(inVal)
-        var otherPart: float_t
-        
+        var otherPart: Float
+
         otherPart = inVal - Float(intPart)
         if (otherPart<0.5) {
             otherPart = 0.0
@@ -172,7 +160,8 @@ class ViewController: UIViewController {
         return(formattedDate)
     }
 /*
-    var len: float_t = 30.0
+
+    var len: Float = 30.0
     var fishType: String = "none"
     var released = true
     var locLogging = true
@@ -182,8 +171,9 @@ class ViewController: UIViewController {
 */
     @IBOutlet weak var topLogLabel: UILabel!
     @IBOutlet weak var bottomLogLabel: UILabel!
-    @IBOutlet weak var maskStriper: UIImageView!
-    @IBOutlet weak var maskBluefish: UIImageView!
+
+    @IBOutlet weak var striperButton: UIButton!
+    @IBOutlet weak var bluefishButton: UIButton!
     
     // toggle whether location logging is desired
     @IBAction func loggingButton(_ sender: Any) {
@@ -302,12 +292,48 @@ class ViewController: UIViewController {
             
         }
         
-        maskStriper.alpha = 0.0
-        maskBluefish.alpha = 0.0
+
+        striperButton.alpha = 1.0
+        bluefishButton.alpha = 1.0
+
         localRecordCnt += 1
         localRecords.text = "Local records stored: \(localRecordCnt)"
         //print("about to reset fish type")
         //self.fishType = "none"
     }
     
+
+    //MARK: - prepare for segues
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToMapView" {
+            let mapVC = segue.destination as! MapViewController
+            mapVC.location = currentLocation
+        } else if segue.identifier == "goToLogin" {
+            //prepare for login
+        } else if segue.identifier == "goToRegister" {
+            //prepare for register
+        }
+    }
+    
+}
+
+//MARK: - locationManager
+
+extension ViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            locationManager.stopUpdatingLocation()
+            currentLatitude = location.coordinate.latitude
+            currentLongitude = location.coordinate.longitude
+            currentLocation = location
+            
+            print("location in locationManager = \(String(describing: currentLocation))")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
 }
