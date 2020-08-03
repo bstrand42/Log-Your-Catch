@@ -26,6 +26,9 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
        
+        emailField2.delegate = self
+        passwordField2.delegate = self
+        
         print("registerViewController page loaded")
         
         if let user = defaults.string(forKey: "User") {
@@ -40,15 +43,6 @@ class RegisterViewController: UIViewController {
             print("no user password credentials found")
         }
         
-        
-        
-       
-    }
-    
-    @IBAction func textFieldEditingEnded(_ sender: UITextField) {
-        
-        checkUserInput()
-        
     }
     
     // toggle whether we're to save the user's credentials...defaults to true
@@ -59,7 +53,7 @@ class RegisterViewController: UIViewController {
     
     @IBAction func registerButtonPressed(_ sender: UIButton) {
         print("registerButtonPressed")
-        checkUserInput()
+        _ = checkUserInput()
         //execute code to register as a new user using emailField1 and passwordField1
         
         print("email = \(String(describing: self.emailField1.text))")
@@ -81,17 +75,28 @@ class RegisterViewController: UIViewController {
         
     }
     
-    func checkUserInput() {
+    func checkUserInput() -> Bool {
         
         if emailField1.text != emailField2.text {
             emailMarker.alpha = 1
+            return false
         } else if passwordField1.text != passwordField2.text {
             passwordMarker.alpha = 1
+            return false
         } else {
             passwordMarker.alpha = 0
             emailMarker.alpha = 0
+            return true
         }
         
+    }
+    
+}
+
+extension RegisterViewController: UITextFieldDelegate {
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return checkUserInput()
     }
     
 }

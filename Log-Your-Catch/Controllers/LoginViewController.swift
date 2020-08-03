@@ -10,6 +10,12 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        passwordField.delegate = self
+    }
+    
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
@@ -26,5 +32,14 @@ class LoginViewController: UIViewController {
     }
     
 
+    
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //execute login code and
+        return true
+    }
     
 }
