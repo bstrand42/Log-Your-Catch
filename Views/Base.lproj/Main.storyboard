@@ -188,7 +188,6 @@
                                         <state key="normal" title="Show Current Location on Map"/>
                                         <connections>
                                             <action selector="showCurrentLocationOnMap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZxH-ba-iLA"/>
-                                            <segue destination="039-YI-MNG" kind="presentation" identifier="goToMapView" id="57T-HX-6SH"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbT-HT-aIc">
@@ -254,6 +253,7 @@
                         <outlet property="striperButton" destination="22h-lP-TZB" id="iJX-hn-67c"/>
                         <outlet property="topLogLabel" destination="xtK-YY-FxC" id="UGX-MB-gNs"/>
                         <segue destination="AlA-dY-rwO" kind="presentation" identifier="goToLoginView" id="bJr-dW-hck"/>
+                        <segue destination="039-YI-MNG" kind="presentation" identifier="goToMapView" id="QDN-Fz-llq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
