@@ -1,9 +1,8 @@
 //
 //  ViewController.swift
-//  LocationManagerDemo
+//  Log Your Catch
 //
-//  Created by Rajan Maheshwari on 22/10/16.
-//  Copyright © 2016 Rajan Maheshwari. All rights reserved.
+//  Created by Brad Strand on 26/7/20.
 //
 
 import UIKit
@@ -18,6 +17,7 @@ class ViewController: UIViewController {
     var locationManager = CLLocationManager()
     
     var len: Float = 30.0
+
     var fishType: String = "none"
     var released = true
     var locLogging = true
@@ -41,8 +41,9 @@ class ViewController: UIViewController {
         readFish()
         print("viewDidLoad count = \(localRecordCnt)")
         localRecords.text = "Local records stored: \(localRecordCnt)"
-        
+
         locationManager.requestLocation()
+
     }
 
     func resetLabels() {
@@ -60,7 +61,6 @@ class ViewController: UIViewController {
     }
     
     //MARK:- IBActions
-    
     
     //temporary function and button to test Login and Register
     @IBAction func forceLogin(_ sender: UIButton) {
@@ -87,16 +87,20 @@ class ViewController: UIViewController {
     @IBAction func striperPressed(_ sender: Any) {
         // print("Striper pressed")
         self.fishType = "Striper"
+
         bluefishButton.alpha = 0.3
         striperButton.alpha = 1.0
+
     }
     
     
     @IBAction func bluefishPressed(_ sender: Any) {
         // print("Bluefish pressed")
         self.fishType = "Bluefish"
+
         striperButton.alpha = 0.3
         bluefishButton.alpha = 1.0
+
     }
     
     func uploadToCloud(arr: [CaughtFish]){
@@ -135,7 +139,7 @@ class ViewController: UIViewController {
     
         let intPart:Int = Int(inVal)
         var otherPart: Float
-        
+
         otherPart = inVal - Float(intPart)
         if (otherPart<0.5) {
             otherPart = 0.0
@@ -156,6 +160,7 @@ class ViewController: UIViewController {
         return(formattedDate)
     }
 /*
+
     var len: Float = 30.0
     var fishType: String = "none"
     var released = true
@@ -166,9 +171,9 @@ class ViewController: UIViewController {
 */
     @IBOutlet weak var topLogLabel: UILabel!
     @IBOutlet weak var bottomLogLabel: UILabel!
+
     @IBOutlet weak var striperButton: UIButton!
     @IBOutlet weak var bluefishButton: UIButton!
-    
     
     // toggle whether location logging is desired
     @IBAction func loggingButton(_ sender: Any) {
@@ -287,14 +292,17 @@ class ViewController: UIViewController {
             
         }
         
+
         striperButton.alpha = 1.0
         bluefishButton.alpha = 1.0
+
         localRecordCnt += 1
         localRecords.text = "Local records stored: \(localRecordCnt)"
         //print("about to reset fish type")
         //self.fishType = "none"
     }
     
+
     //MARK: - prepare for segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -328,5 +336,4 @@ extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
-    
 }

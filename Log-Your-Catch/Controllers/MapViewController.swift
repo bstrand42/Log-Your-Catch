@@ -1,6 +1,8 @@
 //
 //  MapViewController.swift
-//  LocationManagerDemo
+//  Log Your catch
+//
+//  Created by Brad Strand on 26/7/20
 //
 
 import UIKit
@@ -9,8 +11,9 @@ import MapKit
 class MapViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
+  
     var location: CLLocation?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +21,7 @@ class MapViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
         print("after viewdidappear")
         //Setting Region
         
@@ -34,7 +38,7 @@ class MapViewController: UIViewController {
         objectAnnotation.coordinate = pinLocation
         objectAnnotation.title = "My Location"
         self.mapView.addAnnotation(objectAnnotation)
-        
         */
+
     }
 }

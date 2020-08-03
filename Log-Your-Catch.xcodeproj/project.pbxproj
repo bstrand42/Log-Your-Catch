@@ -45,6 +45,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+
 		2201612324D4D0980025A7FE /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -52,6 +53,7 @@
 				E562A7DD1DC521EC00FF86F1 /* LocationManager.swift */,
 			);
 			path = Models;
+
 			sourceTree = "<group>";
 		};
 		E5238F2A1DBB83D30051907A /* Controllers */ = {
@@ -65,6 +67,7 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+
 		E562A7DC1DC521EC00FF86F1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +75,7 @@
 				E582B5EF1DBB817B0002D448 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
+
 			sourceTree = SOURCE_ROOT;
 		};
 		E582B5DA1DBB817A0002D448 = {
@@ -93,8 +97,10 @@
 		E582B5E51DBB817B0002D448 /* Log-Your-Catch */ = {
 			isa = PBXGroup;
 			children = (
+
 				2201612324D4D0980025A7FE /* Models */,
 				E562A7DC1DC521EC00FF86F1 /* Views */,
+
 				E5238F2A1DBB83D30051907A /* Controllers */,
 				E582B5E61DBB817B0002D448 /* AppDelegate.swift */,
 				E582B5ED1DBB817B0002D448 /* Assets.xcassets */,
