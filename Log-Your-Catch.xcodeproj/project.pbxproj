@@ -3,29 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2296E43324D88E1200F24037 /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2296E43224D88E1200F24037 /* LocalDataManager.swift */; };
+		2296E43524D898C900F24037 /* CloudDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2296E43424D898C900F24037 /* CloudDataManager.swift */; };
 		22B39F4224CF6AA100F1DAAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E582B5EA1DBB817B0002D448 /* Main.storyboard */; };
 		22B39F4424CF891F00F1DAAF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B39F4324CF891F00F1DAAF /* LoginViewController.swift */; };
 		22B39F4624CF894800F1DAAF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B39F4524CF894800F1DAAF /* RegisterViewController.swift */; };
 		5DF6755624AAF17600F16731 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5DF6755424AAF17600F16731 /* DataModel.xcdatamodeld */; };
 		E5238F2D1DBB83D30051907A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5238F2B1DBB83D30051907A /* MapViewController.swift */; };
 		E5238F2E1DBB83D30051907A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5238F2C1DBB83D30051907A /* ViewController.swift */; };
-		E562A7DE1DC521EC00FF86F1 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E562A7DD1DC521EC00FF86F1 /* LocationManager.swift */; };
 		E582B5E71DBB817B0002D448 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E582B5E61DBB817B0002D448 /* AppDelegate.swift */; };
 		E582B5EE1DBB817B0002D448 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E582B5ED1DBB817B0002D448 /* Assets.xcassets */; };
 		E582B5F11DBB817B0002D448 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E582B5EF1DBB817B0002D448 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2296E43224D88E1200F24037 /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
+		2296E43424D898C900F24037 /* CloudDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudDataManager.swift; sourceTree = "<group>"; };
 		22B39F4324CF891F00F1DAAF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		22B39F4524CF894800F1DAAF /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		5DF6755524AAF17600F16731 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		E5238F2B1DBB83D30051907A /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E5238F2C1DBB83D30051907A /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E562A7DD1DC521EC00FF86F1 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E582B5E31DBB817B0002D448 /* Log Your Catch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Log Your Catch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E582B5E61DBB817B0002D448 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E582B5EB1DBB817B0002D448 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -45,15 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-
 		2201612324D4D0980025A7FE /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				5DF6755424AAF17600F16731 /* DataModel.xcdatamodeld */,
-				E562A7DD1DC521EC00FF86F1 /* LocationManager.swift */,
+				2296E43224D88E1200F24037 /* LocalDataManager.swift */,
+				2296E43424D898C900F24037 /* CloudDataManager.swift */,
 			);
 			path = Models;
-
 			sourceTree = "<group>";
 		};
 		E5238F2A1DBB83D30051907A /* Controllers */ = {
@@ -67,7 +68,6 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-
 		E562A7DC1DC521EC00FF86F1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -75,7 +75,6 @@
 				E582B5EF1DBB817B0002D448 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
-
 			sourceTree = SOURCE_ROOT;
 		};
 		E582B5DA1DBB817A0002D448 = {
@@ -97,10 +96,8 @@
 		E582B5E51DBB817B0002D448 /* Log-Your-Catch */ = {
 			isa = PBXGroup;
 			children = (
-
 				2201612324D4D0980025A7FE /* Models */,
 				E562A7DC1DC521EC00FF86F1 /* Views */,
-
 				E5238F2A1DBB83D30051907A /* Controllers */,
 				E582B5E61DBB817B0002D448 /* AppDelegate.swift */,
 				E582B5ED1DBB817B0002D448 /* Assets.xcassets */,
@@ -137,7 +134,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 1140;
-				ORGANIZATIONNAME = "Rajan Maheshwari";
+				ORGANIZATIONNAME = Strand;
 				TargetAttributes = {
 					E582B5E21DBB817A0002D448 = {
 						CreatedOnToolsVersion = 8.0;
@@ -147,7 +144,7 @@
 				};
 			};
 			buildConfigurationList = E582B5DE1DBB817A0002D448 /* Build configuration list for PBXProject "Log-Your-Catch" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -182,12 +179,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2296E43324D88E1200F24037 /* LocalDataManager.swift in Sources */,
 				22B39F4424CF891F00F1DAAF /* LoginViewController.swift in Sources */,
 				E582B5E71DBB817B0002D448 /* AppDelegate.swift in Sources */,
 				22B39F4624CF894800F1DAAF /* RegisterViewController.swift in Sources */,
 				5DF6755624AAF17600F16731 /* DataModel.xcdatamodeld in Sources */,
+				2296E43524D898C900F24037 /* CloudDataManager.swift in Sources */,
 				E5238F2D1DBB83D30051907A /* MapViewController.swift in Sources */,
-				E562A7DE1DC521EC00FF86F1 /* LocationManager.swift in Sources */,
 				E5238F2E1DBB83D30051907A /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,7 +318,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -332,7 +331,10 @@
 				DEVELOPMENT_TEAM = RS7VHGVF75;
 				INFOPLIST_FILE = "Log-Your-Catch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.strand.Log-Your-Catch";
 				PRODUCT_NAME = "Log Your Catch";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -349,7 +351,10 @@
 				DEVELOPMENT_TEAM = RS7VHGVF75;
 				INFOPLIST_FILE = "Log-Your-Catch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.strand.Log-Your-Catch";
 				PRODUCT_NAME = "Log Your Catch";
 				PROVISIONING_PROFILE_SPECIFIER = "";
