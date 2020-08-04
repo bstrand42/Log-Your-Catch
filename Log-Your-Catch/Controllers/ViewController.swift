@@ -3,6 +3,7 @@
 //  Log Your Catch
 //
 //  Created by Brad Strand on 26/7/20.
+//  Copyright © 2020 Strand. All rights reserved.
 //
 
 import UIKit
@@ -92,7 +93,7 @@ class ViewController: UIViewController {
         localRecords.text = localDataManager.readFish()
         count = localDataManager.fishArray.count
         if debugPrint { print("\(count) local records found") }
-        cloudDataManager.uploadToCloud(arr: localDataManager.fishArray, saveFunc: localDataManager.saveFish)
+        cloudDataManager.uploadToCloud(array: localDataManager.fishArray, saveFunc: localDataManager.saveFish)
         localRecords.text = localDataManager.readFish()
     }
     

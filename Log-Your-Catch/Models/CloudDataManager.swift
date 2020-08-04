@@ -13,15 +13,27 @@ class CloudDataManager {
     
     var context: NSManagedObjectContext?
     
-    func uploadToCloud(arr: [CaughtFish], saveFunc: () -> Void) {
+    func uploadToCloud(array: [CaughtFish], saveFunc: () -> Void) {
+       
+        checkLogin()
+        //add functionality to upload to cloud
+        clearLocalData(array, saveFunc)
         
-        var count = arr.count
+    }
+    
+    func checkLogin() {
+        //check login and perform segue if necessary to go to loginView
+    }
+    
+    func clearLocalData(_ array: [CaughtFish], _ saveFunc: () -> Void) {
         
-        print("uploadToCloud called: record count = \(arr.count)")
+        var count = array.count
+        
+        print("clearLocalData called: record count = \(array.count)")
         
         while (count > 0) {
-            print("fish length \(arr[count-1].length) being removed")
-            context!.delete(arr[count-1])
+            print("fish length \(array[count-1].length) being removed")
+            context!.delete(array[count-1])
             saveFunc()
             count = count - 1
         }
