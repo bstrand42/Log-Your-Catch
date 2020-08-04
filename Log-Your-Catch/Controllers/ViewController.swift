@@ -30,13 +30,13 @@ class ViewController: UIViewController {
     
 //MARK: - Global Variables
     
-    let debugPrint = true
+    //set to true to print debug logs
+    let debugPrint = false
+    
     var len: Float = 30.0
     var fishType: String = "none"
     var released = true
     var locLogging = true
-    var currentLatitude = 0.0
-    var currentLongitude = 0.0
     var currentLocation: CLLocation?
     
 //singleton of current running context
@@ -46,13 +46,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         locationManager.delegate = self
         localDataManager.context = context
         cloudDataManager.context = context
         
-        print(FileManager.default.urls(for: .documentDirectory, in:.userDomainMask))
+        if debugPrint { print(FileManager.default.urls(for: .documentDirectory, in:.userDomainMask)) }
         
         localRecords.text = localDataManager.readFish()
         
@@ -78,23 +77,11 @@ class ViewController: UIViewController {
         self.fishType = "Striper"
         setAlphas(stripers: 1.0, bluefish: 0.3)
     }
-    
 
     @IBAction func bluefishPressed(_ sender: Any) {
         if debugPrint { print("Bluefish pressed") }
         self.fishType = "Bluefish"
         setAlphas(stripers: 0.3, bluefish: 1.0)
-    }
-    
-    @IBAction func uploadPressed(_ sender: Any) {
-        
-        var count = 0
-        
-        localRecords.text = localDataManager.readFish()
-        count = localDataManager.fishArray.count
-        if debugPrint { print("\(count) local records found") }
-        cloudDataManager.uploadToCloud(array: localDataManager.fishArray, saveFunc: localDataManager.saveFish)
-        localRecords.text = localDataManager.readFish()
     }
     
     // toggle whether location logging is desired
@@ -110,12 +97,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func lenSlider(_ sender: Any) {
-        len = roundToHalf(inVal: slider.value)
+        len = roundToHalf(input: slider.value)
         lenLabel.text = "\(len) inches"
     }
     
     @IBAction func doneButton(_ sender: Any) {
-        
         if (self.fishType == "none") {
             self.topLogLabel.text = "Please select species!"
             self.bottomLogLabel.text = ""
@@ -124,12 +110,10 @@ class ViewController: UIViewController {
             if debugPrint { print("fishtype = \(self.fishType)") }
         }
         
-        locationManager.requestLocation()
+        if locLogging { locationManager.requestLocation() }
         
-        localDataManager.createRecord(released, fishType, len, locLogging, currentLatitude, currentLongitude)
-            
-        // write the record to CoreData
-        localDataManager.saveFish()
+        localDataManager.createRecord(released, fishType, len, locLogging, (currentLocation?.coordinate.latitude)!, (currentLocation?.coordinate.longitude)!)
+            localDataManager.saveFish()
         
         setAlphas(stripers: 1.0, bluefish: 1.0)
         fishType = "none"
@@ -137,23 +121,31 @@ class ViewController: UIViewController {
         localRecords.text = localDataManager.readFish()
     }
     
+    @IBAction func uploadPressed(_ sender: Any) {
+        var count = 0
+        localRecords.text = localDataManager.readFish()
+        count = localDataManager.fishArray.count
+        if debugPrint { print("\(count) local records found") }
+        cloudDataManager.uploadToCloud(array: localDataManager.fishArray, saveFunc: localDataManager.saveFish)
+        localRecords.text = localDataManager.readFish()
+    }
+    
 //MARK: - Other Functions
     
-    func roundToHalf(inVal: Float) -> Float {
-        var retval: Float
+    func roundToHalf(input: Float) -> Float {
+        var output: Float
     
-        let intPart:Int = Int(inVal)
+        let intPart:Int = Int(input)
         var otherPart: Float
 
-        otherPart = inVal - Float(intPart)
+        otherPart = input - Float(intPart)
         if (otherPart<0.5) {
             otherPart = 0.0
         } else {
             otherPart = 0.5
         }
-
-        retval = Float(intPart) + otherPart
-        return(retval)
+        output = Float(intPart) + otherPart
+        return(output)
     }
     
     func setAlphas (stripers striperAlpha: CGFloat, bluefish bluefishAlpha: CGFloat) {
@@ -163,6 +155,27 @@ class ViewController: UIViewController {
 
 //MARK: - Prepare for Segues
     
+    // shouldPerformSegue is called before a segue is performed to determine if it should be performed.
+    // It passes in the segue's identifier, which is used in a switch statement to decide what should happen.
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        switch identifier {
+        case "goToMapView":
+            if currentLocation == nil {
+                return false
+            } else {
+                return true
+            }
+        case "goToLoginView":
+            return true
+        case "goToRegisterView":
+            return true
+        default:
+            return true
+        }
+    }
+    
+    // prepare is called before a segue is performed, but only if shouldPerformSegue returns true.
+    // It passes in the segue object, which is used in a switch statement to decide what should happen.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "goToMapView":
@@ -176,7 +189,6 @@ class ViewController: UIViewController {
             return
         }
     }
-    
 }
 
 //MARK: - LocationManager Delegate
@@ -186,8 +198,7 @@ extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             locationManager.stopUpdatingLocation()
-            currentLatitude = location.coordinate.latitude
-            currentLongitude = location.coordinate.longitude
+            // Update currentLocation for use in the MapView
             currentLocation = location
             
             if debugPrint { print("location in locationManager = \(String(describing: currentLocation))") }
