@@ -29,6 +29,7 @@ class ViewController: UIViewController {
     
 //MARK: - Global Variables
     
+    let debugPrint = true
     var len: Float = 30.0
     var fishType: String = "none"
     var released = true
@@ -54,11 +55,12 @@ class ViewController: UIViewController {
         
         localRecords.text = localDataManager.readFish()
         
+        locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
 
     }
     
-    //MARK:- IBActions
+//MARK:- IBActions
     
     //temporary function and button to test Login and Register
     @IBAction func forceLogin(_ sender: UIButton) {
@@ -71,14 +73,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func striperPressed(_ sender: Any) {
-        // print("Striper pressed")
+        if debugPrint { print("Striper pressed") }
         self.fishType = "Striper"
         setAlphas(stripers: 1.0, bluefish: 0.3)
     }
     
 
     @IBAction func bluefishPressed(_ sender: Any) {
-        // print("Bluefish pressed")
+        if debugPrint { print("Bluefish pressed") }
         self.fishType = "Bluefish"
         setAlphas(stripers: 0.3, bluefish: 1.0)
     }
@@ -89,7 +91,7 @@ class ViewController: UIViewController {
         
         localRecords.text = localDataManager.readFish()
         count = localDataManager.fishArray.count
-        print("\(count) local records found")
+        if debugPrint { print("\(count) local records found") }
         cloudDataManager.uploadToCloud(arr: localDataManager.fishArray, saveFunc: localDataManager.saveFish)
         localRecords.text = localDataManager.readFish()
     }
@@ -97,13 +99,13 @@ class ViewController: UIViewController {
     // toggle whether location logging is desired
     @IBAction func loggingButton(_ sender: Any) {
         locLogging = !locLogging
-        print("logging set to \(locLogging)")
+        if debugPrint { print("logging set to \(locLogging)") }
     }
     
     // toggle released value
     @IBAction func releasedButton(_ sender: Any) {
         released = !released
-        print("released set to \(released)")
+        if debugPrint { print("released set to \(released)") }
     }
     
     @IBAction func lenSlider(_ sender: Any) {
@@ -118,7 +120,7 @@ class ViewController: UIViewController {
             self.bottomLogLabel.text = ""
             return
         } else {
-            print("fishtype = \(self.fishType)")
+            if debugPrint { print("fishtype = \(self.fishType)") }
         }
         
         locationManager.requestLocation()
@@ -129,10 +131,9 @@ class ViewController: UIViewController {
         localDataManager.saveFish()
         
         setAlphas(stripers: 1.0, bluefish: 1.0)
+        fishType = "none"
         
         localRecords.text = localDataManager.readFish()
-        //print("about to reset fish type")
-        //self.fishType = "none"
     }
     
 //MARK: - Other Functions
@@ -188,7 +189,7 @@ extension ViewController: CLLocationManagerDelegate {
             currentLongitude = location.coordinate.longitude
             currentLocation = location
             
-            print("location in locationManager = \(String(describing: currentLocation))")
+            if debugPrint { print("location in locationManager = \(String(describing: currentLocation))") }
         }
     }
     
