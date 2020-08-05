@@ -76,12 +76,16 @@ class ViewController: UIViewController {
         if debugPrint { print("Striper pressed") }
         self.fishType = "Striper"
         setAlphas(stripers: 1.0, bluefish: 0.3)
+        // clear any messages that may be lingering
+        self.topLogLabel.text = ""
     }
 
     @IBAction func bluefishPressed(_ sender: Any) {
         if debugPrint { print("Bluefish pressed") }
         self.fishType = "Bluefish"
         setAlphas(stripers: 0.3, bluefish: 1.0)
+        // clear any messages that may be lingering
+        self.topLogLabel.text = ""
     }
     
     // toggle whether location logging is desired
