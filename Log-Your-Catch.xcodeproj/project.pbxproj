@@ -12,6 +12,7 @@
 		22B39F4224CF6AA100F1DAAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E582B5EA1DBB817B0002D448 /* Main.storyboard */; };
 		22B39F4424CF891F00F1DAAF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B39F4324CF891F00F1DAAF /* LoginViewController.swift */; };
 		22B39F4624CF894800F1DAAF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B39F4524CF894800F1DAAF /* RegisterViewController.swift */; };
+		2C3A26184DD18D692903BB75 /* Pods_Log_Your_Catch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95B21F1E33BFE5DB8E9FA9E2 /* Pods_Log_Your_Catch.framework */; };
 		5DF6755624AAF17600F16731 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5DF6755424AAF17600F16731 /* DataModel.xcdatamodeld */; };
 		E5238F2D1DBB83D30051907A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5238F2B1DBB83D30051907A /* MapViewController.swift */; };
 		E5238F2E1DBB83D30051907A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5238F2C1DBB83D30051907A /* ViewController.swift */; };
@@ -25,7 +26,10 @@
 		2296E43424D898C900F24037 /* CloudDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudDataManager.swift; sourceTree = "<group>"; };
 		22B39F4324CF891F00F1DAAF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		22B39F4524CF894800F1DAAF /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		51E8B447DA5ED8854DE8266A /* Pods-Log-Your-Catch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Log-Your-Catch.release.xcconfig"; path = "Target Support Files/Pods-Log-Your-Catch/Pods-Log-Your-Catch.release.xcconfig"; sourceTree = "<group>"; };
 		5DF6755524AAF17600F16731 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		6904AD757991C7A079E56F09 /* Pods-Log-Your-Catch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Log-Your-Catch.debug.xcconfig"; path = "Target Support Files/Pods-Log-Your-Catch/Pods-Log-Your-Catch.debug.xcconfig"; sourceTree = "<group>"; };
+		95B21F1E33BFE5DB8E9FA9E2 /* Pods_Log_Your_Catch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Log_Your_Catch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5238F2B1DBB83D30051907A /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E5238F2C1DBB83D30051907A /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E582B5E31DBB817B0002D448 /* Log Your Catch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Log Your Catch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,12 +45,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C3A26184DD18D692903BB75 /* Pods_Log_Your_Catch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		065D64EFC83D290A1F652845 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6904AD757991C7A079E56F09 /* Pods-Log-Your-Catch.debug.xcconfig */,
+				51E8B447DA5ED8854DE8266A /* Pods-Log-Your-Catch.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		2201612324D4D0980025A7FE /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -55,6 +70,14 @@
 				2296E43424D898C900F24037 /* CloudDataManager.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2265CA8AEBB203F7B37A21FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				95B21F1E33BFE5DB8E9FA9E2 /* Pods_Log_Your_Catch.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E5238F2A1DBB83D30051907A /* Controllers */ = {
@@ -82,6 +105,8 @@
 			children = (
 				E582B5E51DBB817B0002D448 /* Log-Your-Catch */,
 				E582B5E41DBB817B0002D448 /* Products */,
+				065D64EFC83D290A1F652845 /* Pods */,
+				2265CA8AEBB203F7B37A21FD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,9 +138,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E582B5F51DBB817B0002D448 /* Build configuration list for PBXNativeTarget "Log-Your-Catch" */;
 			buildPhases = (
+				30A534507CE3E56A43A74968 /* [CP] Check Pods Manifest.lock */,
 				E582B5DF1DBB817A0002D448 /* Sources */,
 				E582B5E01DBB817A0002D448 /* Frameworks */,
 				E582B5E11DBB817A0002D448 /* Resources */,
+				43E337D8C50D7AA2D8A7C43C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -138,7 +165,6 @@
 				TargetAttributes = {
 					E582B5E21DBB817A0002D448 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = RS7VHGVF75;
 						LastSwiftMigration = 1140;
 					};
 				};
@@ -173,6 +199,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		30A534507CE3E56A43A74968 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Log-Your-Catch-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		43E337D8C50D7AA2D8A7C43C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Log-Your-Catch/Pods-Log-Your-Catch-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Log-Your-Catch/Pods-Log-Your-Catch-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Log-Your-Catch/Pods-Log-Your-Catch-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E582B5DF1DBB817A0002D448 /* Sources */ = {
@@ -326,8 +394,11 @@
 		};
 		E582B5F61DBB817B0002D448 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6904AD757991C7A079E56F09 /* Pods-Log-Your-Catch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RS7VHGVF75;
 				INFOPLIST_FILE = "Log-Your-Catch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -337,6 +408,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.strand.Log-Your-Catch";
 				PRODUCT_NAME = "Log Your Catch";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
 			};
@@ -344,6 +416,7 @@
 		};
 		E582B5F71DBB817B0002D448 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51E8B447DA5ED8854DE8266A /* Pods-Log-Your-Catch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
