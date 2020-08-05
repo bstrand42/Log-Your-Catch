@@ -32,7 +32,7 @@ class RegisterViewController: UIViewController {
         print("registerViewController page loaded")
         
         if let user = defaults.string(forKey: "User"), let password = defaults.string(forKey: "Password") {
-            print("retrieved user = \(user), password = \(password)")
+            print("retrieved user = \(user), password = \(password) h")
         } else {
             print("no valid credentials found")
             return

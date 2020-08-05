@@ -10,6 +10,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    //MARK: - Global Variables
+    
+    var saveCredentials = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,6 +22,11 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    
+    @IBAction func saveCredentialSwitch(_ sender: Any) {
+        saveCredentials = !saveCredentials
+        print("saveCredentials is now \(saveCredentials)")
+    }
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         
