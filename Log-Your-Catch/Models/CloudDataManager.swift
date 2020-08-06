@@ -6,7 +6,7 @@
 //  Copyright © 2020 Strand. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import CoreData
 import Firebase
 
@@ -32,7 +32,7 @@ class CloudDataManager {
                 
                 print("user is \(String(describing: user))")
                 print("password is \(String(describing: password))")
-                authenticationManager.attemptLogin("1@2.com", "poop") { (success) in
+                authenticationManager.attemptLogin(user, password) { (success) in
                     if success {
                         print("logged in from local data")
                         self.performUpload(array)

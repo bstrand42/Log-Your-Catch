@@ -6,7 +6,7 @@
 //  Copyright © 2020 Strand. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import Firebase
 
 struct AuthenticationManager {
