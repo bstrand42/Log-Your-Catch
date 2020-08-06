@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import CoreData
+import Firebase
 
 class ViewController: UIViewController {
 
@@ -31,7 +32,7 @@ class ViewController: UIViewController {
 //MARK: - Global Variables
     
     //set to true to print debug logs
-    let debugPrint = false
+    static let debugPrint = true
     
     var len: Float = 30.0
     var fishType: String = "none"
@@ -51,7 +52,7 @@ class ViewController: UIViewController {
         localDataManager.context = context
         cloudDataManager.context = context
         
-        if debugPrint { print(FileManager.default.urls(for: .documentDirectory, in:.userDomainMask)) }
+        if ViewController.debugPrint { print(FileManager.default.urls(for: .documentDirectory, in:.userDomainMask)) }
         
         localRecords.text = localDataManager.readFish()
         
@@ -73,7 +74,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func striperPressed(_ sender: Any) {
-        if debugPrint { print("Striper pressed") }
+        if ViewController.debugPrint { print("Striper pressed") }
         self.fishType = "Striper"
         setAlphas(stripers: 1.0, bluefish: 0.3)
         // clear any messages that may be lingering
@@ -81,7 +82,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func bluefishPressed(_ sender: Any) {
-        if debugPrint { print("Bluefish pressed") }
+        if ViewController.debugPrint { print("Bluefish pressed") }
         self.fishType = "Bluefish"
         setAlphas(stripers: 0.3, bluefish: 1.0)
         // clear any messages that may be lingering
@@ -91,13 +92,13 @@ class ViewController: UIViewController {
     // toggle whether location logging is desired
     @IBAction func loggingButton(_ sender: Any) {
         locLogging = !locLogging
-        if debugPrint { print("logging set to \(locLogging)") }
+        if ViewController.debugPrint { print("logging set to \(locLogging)") }
     }
     
     // toggle released value
     @IBAction func releasedButton(_ sender: Any) {
         released = !released
-        if debugPrint { print("released set to \(released)") }
+        if ViewController.debugPrint { print("released set to \(released)") }
     }
     
     @IBAction func lenSlider(_ sender: Any) {
@@ -111,7 +112,7 @@ class ViewController: UIViewController {
             self.bottomLogLabel.text = ""
             return
         } else {
-            if debugPrint { print("fishtype = \(self.fishType)") }
+            if ViewController.debugPrint { print("fishtype = \(self.fishType)") }
         }
         
         if locLogging { locationManager.requestLocation() }
@@ -129,8 +130,12 @@ class ViewController: UIViewController {
         var count = 0
         localRecords.text = localDataManager.readFish()
         count = localDataManager.fishArray.count
-        if debugPrint { print("\(count) local records found") }
-        cloudDataManager.uploadToCloud(array: localDataManager.fishArray, saveFunc: localDataManager.saveFish)
+        if ViewController.debugPrint { print("\(count) local records found") }
+        cloudDataManager.uploadToCloud(array: localDataManager.fishArray, saveFunc: localDataManager.saveFish) { (shouldSegue) in
+            if shouldSegue {
+                self.performSegue(withIdentifier: "goToLoginView", sender: self)
+            }
+        }
         localRecords.text = localDataManager.readFish()
     }
     
@@ -159,7 +164,7 @@ class ViewController: UIViewController {
 
 //MARK: - Prepare for Segues
     
-    // shouldPerformSegue is called before a segue is performed to determine if it should be performed.
+    // "shouldPerformSegue" is called before a segue is performed to determine if it should be performed.
     // It passes in the segue's identifier, which is used in a switch statement to decide what should happen.
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
@@ -178,7 +183,7 @@ class ViewController: UIViewController {
         }
     }
     
-    // prepare is called before a segue is performed, but only if shouldPerformSegue returns true.
+    // "prepare" is called before a segue is performed, but only if shouldPerformSegue returns true.
     // It passes in the segue object, which is used in a switch statement to decide what should happen.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
@@ -193,6 +198,10 @@ class ViewController: UIViewController {
             return
         }
     }
+    
+    @IBAction func unwindToMainViewController(_ unwindSegue: UIStoryboardSegue) {
+    }
+    
 }
 
 //MARK: - LocationManager Delegate
@@ -205,7 +214,7 @@ extension ViewController: CLLocationManagerDelegate {
             // Update currentLocation for use in the MapView
             currentLocation = location
             
-            if debugPrint { print("location in locationManager = \(String(describing: currentLocation))") }
+            if ViewController.debugPrint { print("location in locationManager = \(String(describing: currentLocation))") }
         }
     }
     

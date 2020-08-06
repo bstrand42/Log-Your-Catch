@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 // use user defaults to store (key,value) pairs
 let defaults = UserDefaults.standard
@@ -26,15 +27,17 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
        
+        emailField1.delegate = self
         emailField2.delegate = self
+        passwordField1.delegate = self
         passwordField2.delegate = self
         
-        print("registerViewController page loaded")
+        if ViewController.debugPrint { print("registerViewController page loaded") }
         
         if let user = defaults.string(forKey: "User"), let password = defaults.string(forKey: "Password") {
-            print("retrieved user = \(user), password = \(password) h")
+            if ViewController.debugPrint { print("retrieved user = \(user), password = \(password) h") }
         } else {
-            print("no valid credentials found")
+            if ViewController.debugPrint { print("no valid credentials found") }
             return
         }
         
@@ -47,12 +50,15 @@ class RegisterViewController: UIViewController {
     
     
     @IBAction func registerButtonPressed(_ sender: UIButton) {
-        print("registerButtonPressed")
-        _ = checkUserInput()
+        if ViewController.debugPrint { print("registerButtonPressed") }
+        
+        let checked = checkUserInput()
         //execute code to register as a new user using emailField1 and passwordField1
         
-        print("email = \(String(describing: self.emailField1.text))")
-        print("password = \(String(describing: self.passwordField1.text))")
+        if ViewController.debugPrint {
+            print("email = \(String(describing: self.emailField2.text))")
+            print("password = \(String(describing: self.passwordField2.text))")
+        }
         
         if saveCredentials == true {
             print("would save user credentials here")
@@ -60,8 +66,25 @@ class RegisterViewController: UIViewController {
             defaults.set(self.emailField1.text, forKey: "User")
             defaults.set(self.passwordField1.text, forKey: "Password")
             print("saved user credentials")
+        } else {
+            print("set user credentials to empty strings")
+            defaults.set("", forKey: "User")
+            defaults.set("", forKey: "Password")
         }
-
+        
+        if checked == true {
+            if let email = emailField2.text, let password = passwordField2.text {
+                Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                    if let e = error {
+                        print(e.localizedDescription)
+                    } else {
+                        self.performSegue(withIdentifier: "registerSuccess", sender: self)
+                    }
+                }
+            }
+        } else {
+            if ViewController.debugPrint { print("don't match") }
+        }
     }
     
     @IBAction func returnToLoginButtonPressed(_ sender: UIButton) {
@@ -71,7 +94,7 @@ class RegisterViewController: UIViewController {
     }
     
     func checkUserInput() -> Bool {
-        
+
         if emailField1.text != emailField2.text {
             emailMarker.alpha = 1
             return false
@@ -90,8 +113,28 @@ class RegisterViewController: UIViewController {
 
 extension RegisterViewController: UITextFieldDelegate {
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        return checkUserInput()
+    // TODO change this to select next textField
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
     }
     
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        switch textField {
+        case emailField1:
+            return true
+        case emailField2:
+            return checkUserInput()
+        case passwordField1:
+            return true
+        case passwordField2:
+            return checkUserInput()
+        default:
+            return true
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("\(textField) ended editing")
+    }
 }

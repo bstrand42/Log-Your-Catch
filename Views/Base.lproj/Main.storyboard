@@ -252,7 +252,7 @@
                         <outlet property="striperButton" destination="22h-lP-TZB" id="iJX-hn-67c"/>
                         <outlet property="topLogLabel" destination="xtK-YY-FxC" id="UGX-MB-gNs"/>
                         <segue destination="AlA-dY-rwO" kind="presentation" identifier="goToLoginView" id="bJr-dW-hck"/>
-                        <segue destination="039-YI-MNG" kind="presentation" identifier="goToMapView" id="QDN-Fz-llq"/>
+                        <segue destination="039-YI-MNG" kind="presentation" identifier="goToMapView" modalPresentationStyle="fullScreen" id="QDN-Fz-llq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -376,33 +376,50 @@
             <objects>
                 <viewController storyboardIdentifier="MapViewController" title="Map View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="039-YI-MNG" customClass="MapViewController" customModule="Log_Your_Catch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gnc-Of-37Q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0n5-AF-f6K">
-                                <rect key="frame" x="10" y="66" width="394" height="732"/>
-                                <connections>
-                                    <outlet property="delegate" destination="039-YI-MNG" id="tkv-PM-WTg"/>
-                                </connections>
-                            </mapView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Gje-Gk-Pbc">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <subviews>
+                                    <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gFD-Lx-ACZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <items>
+                                            <navigationItem id="9qz-4T-Zs1">
+                                                <barButtonItem key="leftBarButtonItem" systemItem="done" id="q0W-yk-reF">
+                                                    <connections>
+                                                        <action selector="doneButtonPressed:" destination="039-YI-MNG" id="5eB-Nv-Mxd"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0n5-AF-f6K">
+                                        <rect key="frame" x="0.0" y="44" width="414" height="808"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="039-YI-MNG" id="tkv-PM-WTg"/>
+                                        </connections>
+                                    </mapView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="guc-8n-9hm" firstAttribute="trailing" secondItem="0n5-AF-f6K" secondAttribute="trailing" constant="10" id="FLS-9D-DFK"/>
-                            <constraint firstItem="0n5-AF-f6K" firstAttribute="leading" secondItem="guc-8n-9hm" secondAttribute="leading" constant="10" id="GZf-h6-eL5"/>
-                            <constraint firstItem="0n5-AF-f6K" firstAttribute="top" secondItem="guc-8n-9hm" secondAttribute="top" constant="10" id="P9y-Xq-cTY"/>
-                            <constraint firstItem="guc-8n-9hm" firstAttribute="bottom" secondItem="0n5-AF-f6K" secondAttribute="bottom" constant="10" id="S6Y-K4-Z1M"/>
+                            <constraint firstAttribute="bottom" secondItem="Gje-Gk-Pbc" secondAttribute="bottom" id="6tO-2j-wey"/>
+                            <constraint firstItem="Gje-Gk-Pbc" firstAttribute="trailing" secondItem="guc-8n-9hm" secondAttribute="trailing" id="Bwb-TQ-svX"/>
+                            <constraint firstItem="Gje-Gk-Pbc" firstAttribute="leading" secondItem="guc-8n-9hm" secondAttribute="leading" id="M5F-kv-bDm"/>
+                            <constraint firstItem="Gje-Gk-Pbc" firstAttribute="top" secondItem="guc-8n-9hm" secondAttribute="top" id="kwV-oC-Tei"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="guc-8n-9hm"/>
                     </view>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="0n5-AF-f6K" id="UHc-b8-UfS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vfb-vb-FZB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1938" y="-82"/>
+            <point key="canvasLocation" x="1937.68115942029" y="-82.366071428571431"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="rCT-pN-tJh">
@@ -439,9 +456,6 @@
                                                                 <rect key="frame" x="0.0" y="43" width="237.5" height="32.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
-                                                                <connections>
-                                                                    <action selector="textFieldEditingEnded:" destination="vPz-pk-hy8" eventType="editingDidEnd" id="Rj3-RB-yHa"/>
-                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -469,9 +483,6 @@
                                                                 <rect key="frame" x="0.0" y="43" width="238.5" height="32.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="new-password"/>
-                                                                <connections>
-                                                                    <action selector="textFieldEditingEnded:" destination="vPz-pk-hy8" eventType="editingDidEnd" id="COu-Gd-iOz"/>
-                                                                </connections>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
@@ -559,9 +570,11 @@
                         <outlet property="passwordField1" destination="hSf-qp-g4Y" id="2Xn-1I-aSM"/>
                         <outlet property="passwordField2" destination="Pm7-3b-kz3" id="oST-d8-Dav"/>
                         <outlet property="passwordMarker" destination="FCR-n1-Bl5" id="byZ-4b-IMP"/>
+                        <segue destination="54H-Ep-7ZY" kind="unwind" identifier="registerSuccess" unwindAction="unwindToMainViewController:" id="Zcs-0o-OX9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ikX-vG-u4B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="54H-Ep-7ZY" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1620" y="637"/>
         </scene>

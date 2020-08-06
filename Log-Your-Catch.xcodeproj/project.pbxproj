@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220EB78624DB97CF00CB2204 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EB78524DB97CF00CB2204 /* AuthenticationManager.swift */; };
 		2296E43324D88E1200F24037 /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2296E43224D88E1200F24037 /* LocalDataManager.swift */; };
 		2296E43524D898C900F24037 /* CloudDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2296E43424D898C900F24037 /* CloudDataManager.swift */; };
 		22B39F4224CF6AA100F1DAAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E582B5EA1DBB817B0002D448 /* Main.storyboard */; };
 		22B39F4424CF891F00F1DAAF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B39F4324CF891F00F1DAAF /* LoginViewController.swift */; };
 		22B39F4624CF894800F1DAAF /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B39F4524CF894800F1DAAF /* RegisterViewController.swift */; };
+		22F4D05524DB7DA60069E8D1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22F4D05424DB7DA60069E8D1 /* GoogleService-Info.plist */; };
 		2C3A26184DD18D692903BB75 /* Pods_Log_Your_Catch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95B21F1E33BFE5DB8E9FA9E2 /* Pods_Log_Your_Catch.framework */; };
 		5DF6755624AAF17600F16731 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5DF6755424AAF17600F16731 /* DataModel.xcdatamodeld */; };
 		E5238F2D1DBB83D30051907A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5238F2B1DBB83D30051907A /* MapViewController.swift */; };
@@ -22,10 +24,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		220EB78524DB97CF00CB2204 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		2296E43224D88E1200F24037 /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
 		2296E43424D898C900F24037 /* CloudDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudDataManager.swift; sourceTree = "<group>"; };
 		22B39F4324CF891F00F1DAAF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		22B39F4524CF894800F1DAAF /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		22F4D05424DB7DA60069E8D1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		51E8B447DA5ED8854DE8266A /* Pods-Log-Your-Catch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Log-Your-Catch.release.xcconfig"; path = "Target Support Files/Pods-Log-Your-Catch/Pods-Log-Your-Catch.release.xcconfig"; sourceTree = "<group>"; };
 		5DF6755524AAF17600F16731 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		6904AD757991C7A079E56F09 /* Pods-Log-Your-Catch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Log-Your-Catch.debug.xcconfig"; path = "Target Support Files/Pods-Log-Your-Catch/Pods-Log-Your-Catch.debug.xcconfig"; sourceTree = "<group>"; };
@@ -58,7 +62,6 @@
 				6904AD757991C7A079E56F09 /* Pods-Log-Your-Catch.debug.xcconfig */,
 				51E8B447DA5ED8854DE8266A /* Pods-Log-Your-Catch.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -68,6 +71,7 @@
 				5DF6755424AAF17600F16731 /* DataModel.xcdatamodeld */,
 				2296E43224D88E1200F24037 /* LocalDataManager.swift */,
 				2296E43424D898C900F24037 /* CloudDataManager.swift */,
+				220EB78524DB97CF00CB2204 /* AuthenticationManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -127,6 +131,7 @@
 				E582B5E61DBB817B0002D448 /* AppDelegate.swift */,
 				E582B5ED1DBB817B0002D448 /* Assets.xcassets */,
 				E582B5F21DBB817B0002D448 /* Info.plist */,
+				22F4D05424DB7DA60069E8D1 /* GoogleService-Info.plist */,
 			);
 			path = "Log-Your-Catch";
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22B39F4224CF6AA100F1DAAF /* Main.storyboard in Resources */,
+				22F4D05524DB7DA60069E8D1 /* GoogleService-Info.plist in Resources */,
 				E582B5F11DBB817B0002D448 /* LaunchScreen.storyboard in Resources */,
 				E582B5EE1DBB817B0002D448 /* Assets.xcassets in Resources */,
 			);
@@ -250,6 +256,7 @@
 				2296E43324D88E1200F24037 /* LocalDataManager.swift in Sources */,
 				22B39F4424CF891F00F1DAAF /* LoginViewController.swift in Sources */,
 				E582B5E71DBB817B0002D448 /* AppDelegate.swift in Sources */,
+				220EB78624DB97CF00CB2204 /* AuthenticationManager.swift in Sources */,
 				22B39F4624CF894800F1DAAF /* RegisterViewController.swift in Sources */,
 				5DF6755624AAF17600F16731 /* DataModel.xcdatamodeld in Sources */,
 				2296E43524D898C900F24037 /* CloudDataManager.swift in Sources */,

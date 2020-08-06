@@ -7,16 +7,20 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
     
     //MARK: - Global Variables
     
     var saveCredentials = true
+    let authenticationManager = AuthenticationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        print("about to set delegate")
         passwordField.delegate = self
     }
     
@@ -30,8 +34,15 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         
-        //execute login code using emailField and passwordField
-        
+        if let email = emailField.text, let password = passwordField.text {
+            
+            authenticationManager.attemptLogin(email, password) { (shouldSegue) in
+                self.dismiss(animated: true, completion: nil)
+            }
+            
+        } else {
+            if ViewController.debugPrint { print("something's wrong with mailField and passwordField") }
+        }
     }
     
     @IBAction func registerPressed(_ sender: UIButton) {
@@ -48,6 +59,7 @@ extension LoginViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //execute login code and
+        
         return true
     }
     

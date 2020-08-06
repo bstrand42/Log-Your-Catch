@@ -6,23 +6,63 @@
 //  Copyright © 2020 Strand. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreData
+import Firebase
 
 class CloudDataManager {
     
     var context: NSManagedObjectContext?
     
-    func uploadToCloud(array: [CaughtFish], saveFunc: () -> Void) {
-       
-        checkLogin()
-        //add functionality to upload to cloud
-        clearLocalData(array, saveFunc)
+    let authenticationManager = AuthenticationManager()
+    
+    func uploadToCloud(array: [CaughtFish], saveFunc: @escaping() -> Void, completion: @escaping(_ shouldSegue: Bool) -> Void) {
+        
+        if checkLogin() {
+            
+            performUpload(array)
+            clearLocalData(array, saveFunc)
+            print("already logged in")
+            completion(false)
+            
+        } else {
+            let user = defaults.string(forKey: "User") ?? ""
+            let password = defaults.string(forKey: "Password") ?? ""
+            if user != "" && password != "" {
+                
+                print("user is \(String(describing: user))")
+                print("password is \(String(describing: password))")
+                authenticationManager.attemptLogin("1@2.com", "poop") { (success) in
+                    if success {
+                        print("logged in from local data")
+                        self.performUpload(array)
+                        self.clearLocalData(array, saveFunc)
+                        completion(false)
+                    } else {
+                        print("error logging in")
+                        completion(true)
+                    }
+                }
+            } else {
+                print("no info in local storage")
+                completion(true)
+            }
+        }
         
     }
     
-    func checkLogin() {
-        //check login and perform segue if necessary to go to loginView
+    func checkLogin() -> Bool {
+        
+        if Auth.auth().currentUser == nil {
+            return false
+        } else {
+            return true
+        }
+        
+    }
+    
+    func performUpload(_ array: [CaughtFish]) {
+        
     }
     
     func clearLocalData(_ array: [CaughtFish], _ saveFunc: () -> Void) {
