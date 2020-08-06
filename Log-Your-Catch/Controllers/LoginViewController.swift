@@ -18,9 +18,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        print("about to set delegate")
         passwordField.delegate = self
     }
     
@@ -29,38 +26,35 @@ class LoginViewController: UIViewController {
     
     @IBAction func saveCredentialSwitch(_ sender: Any) {
         saveCredentials = !saveCredentials
-        print("saveCredentials is now \(saveCredentials)")
+        if loginDebug { print("saveCredentials is now \(saveCredentials)") }
     }
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
-        
         if let email = emailField.text, let password = passwordField.text {
-            
             authenticationManager.attemptLogin(email, password) { (shouldSegue) in
                 self.dismiss(animated: true, completion: nil)
             }
-            
         } else {
-            if ViewController.debugPrint { print("something's wrong with mailField and passwordField") }
+            if loginDebug { print("something's wrong with mailField and passwordField") }
         }
     }
     
     @IBAction func registerPressed(_ sender: UIButton) {
-        
-        self.performSegue(withIdentifier: "goToRegisterView", sender: self)
-        
+        self.performSegue(withIdentifier: K.Segue.goToRegisterView, sender: self)
     }
-    
-
-    
 }
 
 extension LoginViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //execute login code and
-        
+        if let email = emailField.text, let password = passwordField.text {
+            authenticationManager.attemptLogin(email, password) { (shouldSegue) in
+                self.dismiss(animated: true, completion: nil)
+            }
+        } else {
+            if loginDebug { print("something's wrong with mailField and passwordField") }
+            
+        }
         return true
     }
-    
 }

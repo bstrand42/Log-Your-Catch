@@ -18,7 +18,7 @@ class LocalDataManager {
     func getDate() -> String {
         let date = Date()
         let format = DateFormatter()
-        format.dateFormat = "yyyy-MM-dd HH:mm"
+        format.dateFormat = K.dateFormat
         let formattedDate = format.string(from: date)
         // print(formattedDate)
         return(formattedDate)
@@ -46,7 +46,7 @@ class LocalDataManager {
         do {
             try context!.save()
         } catch {
-            print("Error saving context: \(error)")
+            if coreDataDebug { print("Error saving context: \(error)") }
         }
     }
     
@@ -55,12 +55,26 @@ class LocalDataManager {
         let request : NSFetchRequest <CaughtFish> = CaughtFish.fetchRequest()
         do {
             fishArray = try context!.fetch(request)
-            print("count of records read = \(fishArray.count)")
+            if coreDataDebug { print("count of records read = \(fishArray.count)") }
             return "Local records stored: \(fishArray.count)"
         } catch {
-            print("Error fetching data from context: \(error)")
+            if coreDataDebug { print("Error fetching data from context: \(error)") }
             return("Error fetching data from context: \(error)")
         }
+    }
+    
+    func readFish() -> [CaughtFish] {
+        
+        let request : NSFetchRequest <CaughtFish> = CaughtFish.fetchRequest()
+        do {
+            fishArray = try context!.fetch(request) //this is failing to unwrap, causing a fatal error.
+            if coreDataDebug { print("count of records read = \(fishArray.count)") }
+        } catch {
+            if coreDataDebug { print("Error fetching data from context: \(error)") }
+        }
+        
+        return fishArray
+        
     }
     
 }

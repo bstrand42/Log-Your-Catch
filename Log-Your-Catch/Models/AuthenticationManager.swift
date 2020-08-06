@@ -22,5 +22,16 @@ struct AuthenticationManager {
             }
         }
     }
+    
+    func checkLoginInput() -> Bool {
+        
+        if Auth.auth().currentUser == nil {
+            return false
+        } else {
+            return true
+        }
+        
+    }
+    
 }
 

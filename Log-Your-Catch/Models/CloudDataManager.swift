@@ -12,17 +12,20 @@ import Firebase
 
 class CloudDataManager {
     
+    let db = Firestore.firestore()
+    
     var context: NSManagedObjectContext?
     
     let authenticationManager = AuthenticationManager()
+    let localDataManager = LocalDataManager()
     
     func uploadToCloud(array: [CaughtFish], saveFunc: @escaping() -> Void, completion: @escaping(_ shouldSegue: Bool) -> Void) {
         
-        if checkLogin() {
+        if authenticationManager.checkLoginInput() {
             
-            performUpload(array)
+            performUpload()
             clearLocalData(array, saveFunc)
-            print("already logged in")
+            if attemptToUploadCasesDebug { print("already logged in") }
             completion(false)
             
         } else {
@@ -30,49 +33,64 @@ class CloudDataManager {
             let password = defaults.string(forKey: "Password") ?? ""
             if user != "" && password != "" {
                 
-                print("user is \(String(describing: user))")
-                print("password is \(String(describing: password))")
+                if coreDataDebug || firestoreDebug {
+                    print("user is \(String(describing: user))")
+                    print("password is \(String(describing: password))")
+                }
+                
                 authenticationManager.attemptLogin(user, password) { (success) in
                     if success {
-                        print("logged in from local data")
-                        self.performUpload(array)
+                        if attemptToUploadCasesDebug { print("logged in from local data") }
+                        self.performUpload()
                         self.clearLocalData(array, saveFunc)
                         completion(false)
                     } else {
-                        print("error logging in")
+                        if attemptToUploadCasesDebug { print("error logging in") }
                         completion(true)
                     }
                 }
             } else {
-                print("no info in local storage")
+                if attemptToUploadCasesDebug { print("no info in local storage") }
                 completion(true)
             }
         }
         
     }
     
-    func checkLogin() -> Bool {
-        
-        if Auth.auth().currentUser == nil {
-            return false
-        } else {
-            return true
-        }
-        
-    }
     
-    func performUpload(_ array: [CaughtFish]) {
+    
+    func performUpload() {
         
+        let fishArray: [CaughtFish] = localDataManager.readFish()
+        
+        if let logger = Auth.auth().currentUser?.email {
+            
+            for fish in fishArray {
+                
+                db.collection(K.FStore.collectionName).addDocument(data: [
+                    K.FStore.fishTypeField: fish.species ?? "",
+                    K.FStore.lengthField: fish.length,
+                    K.FStore.releasedField: fish.released,
+                    K.FStore.latitudeField: fish.latitude,
+                    K.FStore.longitudeField: fish.longitude,
+                    K.FStore.loggerField: logger,
+                    K.FStore.dateField: fish.date ?? ""
+                    
+                ])
+            }
+        } else {
+            if firestoreDebug { print("couldn't find user, so no upload") }
+        }
     }
     
     func clearLocalData(_ array: [CaughtFish], _ saveFunc: () -> Void) {
         
         var count = array.count
         
-        print("clearLocalData called: record count = \(array.count)")
+        if coreDataDebug || firestoreDebug { print("clearLocalData called: record count = \(array.count)") }
         
         while (count > 0) {
-            print("fish length \(array[count-1].length) being removed")
+            if coreDataDebug { print("fish length \(array[count-1].length) being removed") }
             context!.delete(array[count-1])
             saveFunc()
             count = count - 1

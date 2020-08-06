@@ -32,12 +32,12 @@ class RegisterViewController: UIViewController {
         passwordField1.delegate = self
         passwordField2.delegate = self
         
-        if ViewController.debugPrint { print("registerViewController page loaded") }
+        if registerDebug { print("registerViewController page loaded") }
         
-        if let user = defaults.string(forKey: "User"), let password = defaults.string(forKey: "Password") {
-            if ViewController.debugPrint { print("retrieved user = \(user), password = \(password) h") }
+        if let user = defaults.string(forKey: K.CoreDataCredentials.userKey), let password = defaults.string(forKey: K.CoreDataCredentials.passwordKey) {
+            if coreDataDebug || registerDebug { print("retrieved user = \(user), password = \(password) h") }
         } else {
-            if ViewController.debugPrint { print("no valid credentials found") }
+            if coreDataDebug || registerDebug { print("no valid credentials found") }
             return
         }
         
@@ -50,26 +50,25 @@ class RegisterViewController: UIViewController {
     
     
     @IBAction func registerButtonPressed(_ sender: UIButton) {
-        if ViewController.debugPrint { print("registerButtonPressed") }
+        if registerDebug { print("registerButtonPressed") }
         
         let checked = checkUserInput()
         //execute code to register as a new user using emailField1 and passwordField1
         
-        if ViewController.debugPrint {
+        if registerDebug {
             print("email = \(String(describing: self.emailField2.text))")
             print("password = \(String(describing: self.passwordField2.text))")
         }
         
         if saveCredentials == true {
-            print("would save user credentials here")
             // TODO: handle the case where either string is nil
-            defaults.set(self.emailField1.text, forKey: "User")
-            defaults.set(self.passwordField1.text, forKey: "Password")
-            print("saved user credentials")
+            defaults.set(self.emailField1.text, forKey: K.CoreDataCredentials.userKey)
+            defaults.set(self.passwordField1.text, forKey: K.CoreDataCredentials.passwordKey)
+            if coreDataDebug { print("saved user credentials") }
         } else {
             print("set user credentials to empty strings")
-            defaults.set("", forKey: "User")
-            defaults.set("", forKey: "Password")
+            defaults.set("", forKey: K.CoreDataCredentials.userKey)
+            defaults.set("", forKey: K.CoreDataCredentials.passwordKey)
         }
         
         if checked == true {
@@ -78,12 +77,12 @@ class RegisterViewController: UIViewController {
                     if let e = error {
                         print(e.localizedDescription)
                     } else {
-                        self.performSegue(withIdentifier: "registerSuccess", sender: self)
+                        self.performSegue(withIdentifier: K.Segue.goBackToMain , sender: self)
                     }
                 }
             }
         } else {
-            if ViewController.debugPrint { print("don't match") }
+            if registerDebug { print("don't match") }
         }
     }
     

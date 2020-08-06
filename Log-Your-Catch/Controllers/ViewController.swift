@@ -15,9 +15,9 @@ class ViewController: UIViewController {
 
 //MARK: - Managers
     
-    var locationManager = CLLocationManager()
-    var localDataManager = LocalDataManager()
-    var cloudDataManager = CloudDataManager()
+    let locationManager = CLLocationManager()
+    let localDataManager = LocalDataManager()
+    let cloudDataManager = CloudDataManager()
     
 //MARK: - IBOutlets
     
@@ -31,11 +31,8 @@ class ViewController: UIViewController {
     
 //MARK: - Global Variables
     
-    //set to true to print debug logs
-    static let debugPrint = true
-    
     var len: Float = 30.0
-    var fishType: String = "none"
+    var fishType = K.FishType.nilFish
     var released = true
     var locLogging = true
     var currentLocation: CLLocation?
@@ -52,7 +49,7 @@ class ViewController: UIViewController {
         localDataManager.context = context
         cloudDataManager.context = context
         
-        if ViewController.debugPrint { print(FileManager.default.urls(for: .documentDirectory, in:.userDomainMask)) }
+        if coreDataDebug { print(FileManager.default.urls(for: .documentDirectory, in:.userDomainMask)) }
         
         localRecords.text = localDataManager.readFish()
         
@@ -65,25 +62,25 @@ class ViewController: UIViewController {
     
     //temporary function and button to test Login and Register
     @IBAction func forceLogin(_ sender: UIButton) {
-        performSegue(withIdentifier: "goToLoginView", sender: self)
+        performSegue(withIdentifier: K.Segue.goToLoginView, sender: self)
     }
 
     @IBAction func showCurrentLocationOnMap(_ sender: AnyObject) {
         locationManager.requestLocation()
-        performSegue(withIdentifier: "goToMapView", sender: self)
+        performSegue(withIdentifier: K.Segue.goToMapView, sender: self)
     }
     
     @IBAction func striperPressed(_ sender: Any) {
-        if ViewController.debugPrint { print("Striper pressed") }
-        self.fishType = "Striper"
+        if UIDebug { print("Striper pressed") }
+        self.fishType = K.FishType.striper
         setAlphas(stripers: 1.0, bluefish: 0.3)
         // clear any messages that may be lingering
         self.topLogLabel.text = ""
     }
 
     @IBAction func bluefishPressed(_ sender: Any) {
-        if ViewController.debugPrint { print("Bluefish pressed") }
-        self.fishType = "Bluefish"
+        if UIDebug { print("Bluefish pressed") }
+        self.fishType = K.FishType.bluefish
         setAlphas(stripers: 0.3, bluefish: 1.0)
         // clear any messages that may be lingering
         self.topLogLabel.text = ""
@@ -92,13 +89,13 @@ class ViewController: UIViewController {
     // toggle whether location logging is desired
     @IBAction func loggingButton(_ sender: Any) {
         locLogging = !locLogging
-        if ViewController.debugPrint { print("logging set to \(locLogging)") }
+        if UIDebug { print("logging set to \(locLogging)") }
     }
     
     // toggle released value
     @IBAction func releasedButton(_ sender: Any) {
         released = !released
-        if ViewController.debugPrint { print("released set to \(released)") }
+        if UIDebug { print("released set to \(released)") }
     }
     
     @IBAction func lenSlider(_ sender: Any) {
@@ -107,12 +104,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func doneButton(_ sender: Any) {
-        if (self.fishType == "none") {
+        if (self.fishType == K.FishType.nilFish) {
             self.topLogLabel.text = "Please select species!"
             self.bottomLogLabel.text = ""
             return
         } else {
-            if ViewController.debugPrint { print("fishtype = \(self.fishType)") }
+            if UIDebug { print("fishtype = \(self.fishType)") }
         }
         
         if locLogging { locationManager.requestLocation() }
@@ -121,7 +118,7 @@ class ViewController: UIViewController {
             localDataManager.saveFish()
         
         setAlphas(stripers: 1.0, bluefish: 1.0)
-        fishType = "none"
+        fishType = K.FishType.nilFish
         
         localRecords.text = localDataManager.readFish()
     }
@@ -130,10 +127,10 @@ class ViewController: UIViewController {
         var count = 0
         localRecords.text = localDataManager.readFish()
         count = localDataManager.fishArray.count
-        if ViewController.debugPrint { print("\(count) local records found") }
+        if coreDataDebug { print("\(count) local records found") }
         cloudDataManager.uploadToCloud(array: localDataManager.fishArray, saveFunc: localDataManager.saveFish) { (shouldSegue) in
             if shouldSegue {
-                self.performSegue(withIdentifier: "goToLoginView", sender: self)
+                self.performSegue(withIdentifier: K.Segue.goToLoginView, sender: self)
             }
         }
         localRecords.text = localDataManager.readFish()
@@ -168,16 +165,15 @@ class ViewController: UIViewController {
     // It passes in the segue's identifier, which is used in a switch statement to decide what should happen.
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
-        case "goToMapView":
+        case K.Segue.goToMapView:
             if currentLocation == nil {
                 return false
             } else {
                 return true
             }
-        case "goToLoginView":
+        case K.Segue.goToLoginView:
             return true
-        case "goToRegisterView":
-            return true
+
         default:
             return true
         }
@@ -187,12 +183,10 @@ class ViewController: UIViewController {
     // It passes in the segue object, which is used in a switch statement to decide what should happen.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "goToMapView":
+        case K.Segue.goToMapView:
             let mapVC = segue.destination as! MapViewController
             mapVC.location = currentLocation
-        case "goToLoginView":
-            return
-        case "goToRegisterView":
+        case K.Segue.goToLoginView:
             return
         default:
             return
@@ -214,7 +208,7 @@ extension ViewController: CLLocationManagerDelegate {
             // Update currentLocation for use in the MapView
             currentLocation = location
             
-            if ViewController.debugPrint { print("location in locationManager = \(String(describing: currentLocation))") }
+            if locationDebug { print("location in locationManager = \(String(describing: currentLocation))") }
         }
     }
     

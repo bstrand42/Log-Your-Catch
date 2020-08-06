@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  LocationManagerDemo
+//  Log-Your-Catch
 //
-//  Created by Rajan Maheshwari on 22/10/16.
-//  Copyright © 2016 Rajan Maheshwari. All rights reserved.
+//  Created by Bradley Strand on 7/27/20.
+//  Copyright © 2020 Strand. All rights reserved.
 //
 
 import UIKit
@@ -13,11 +13,16 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    override init() {
+        FirebaseApp.configure()
+        super.init()
+    }
+    
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        FirebaseApp.configure()
+        
         
         let db = Firestore.firestore()
         

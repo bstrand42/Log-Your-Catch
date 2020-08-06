@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		220EB78624DB97CF00CB2204 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EB78524DB97CF00CB2204 /* AuthenticationManager.swift */; };
+		220EB78824DBD18D00CB2204 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EB78724DBD18D00CB2204 /* Constants.swift */; };
 		2296E43324D88E1200F24037 /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2296E43224D88E1200F24037 /* LocalDataManager.swift */; };
 		2296E43524D898C900F24037 /* CloudDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2296E43424D898C900F24037 /* CloudDataManager.swift */; };
 		22B39F4224CF6AA100F1DAAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E582B5EA1DBB817B0002D448 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		220EB78524DB97CF00CB2204 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		220EB78724DBD18D00CB2204 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2296E43224D88E1200F24037 /* LocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
 		2296E43424D898C900F24037 /* CloudDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudDataManager.swift; sourceTree = "<group>"; };
 		22B39F4324CF891F00F1DAAF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				2201612324D4D0980025A7FE /* Models */,
 				E562A7DC1DC521EC00FF86F1 /* Views */,
 				E5238F2A1DBB83D30051907A /* Controllers */,
+				220EB78724DBD18D00CB2204 /* Constants.swift */,
 				E582B5E61DBB817B0002D448 /* AppDelegate.swift */,
 				E582B5ED1DBB817B0002D448 /* Assets.xcassets */,
 				E582B5F21DBB817B0002D448 /* Info.plist */,
@@ -258,6 +261,7 @@
 				E582B5E71DBB817B0002D448 /* AppDelegate.swift in Sources */,
 				220EB78624DB97CF00CB2204 /* AuthenticationManager.swift in Sources */,
 				22B39F4624CF894800F1DAAF /* RegisterViewController.swift in Sources */,
+				220EB78824DBD18D00CB2204 /* Constants.swift in Sources */,
 				5DF6755624AAF17600F16731 /* DataModel.xcdatamodeld in Sources */,
 				2296E43524D898C900F24037 /* CloudDataManager.swift in Sources */,
 				E5238F2D1DBB83D30051907A /* MapViewController.swift in Sources */,
