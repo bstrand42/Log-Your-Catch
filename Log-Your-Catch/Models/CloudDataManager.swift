@@ -61,8 +61,6 @@ class CloudDataManager {
     
     func performUpload() {
         
-        let fishArray: [CaughtFish] = localDataManager.readFish()
-        
         if let logger = Auth.auth().currentUser?.email {
             
             for fish in fishArray {

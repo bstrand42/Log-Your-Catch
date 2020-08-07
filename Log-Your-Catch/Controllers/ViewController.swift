@@ -59,11 +59,6 @@ class ViewController: UIViewController {
     }
     
 //MARK:- IBActions
-    
-    //temporary function and button to test Login and Register
-    @IBAction func forceLogin(_ sender: UIButton) {
-        performSegue(withIdentifier: K.Segue.goToLoginView, sender: self)
-    }
 
     @IBAction func showCurrentLocationOnMap(_ sender: AnyObject) {
         locationManager.requestLocation()
@@ -126,9 +121,9 @@ class ViewController: UIViewController {
     @IBAction func uploadPressed(_ sender: Any) {
         var count = 0
         localRecords.text = localDataManager.readFish()
-        count = localDataManager.fishArray.count
+        count = fishArray.count
         if coreDataDebug { print("\(count) local records found") }
-        cloudDataManager.uploadToCloud(array: localDataManager.fishArray, saveFunc: localDataManager.saveFish) { (shouldSegue) in
+        cloudDataManager.uploadToCloud(array: fishArray, saveFunc: localDataManager.saveFish) { (shouldSegue) in
             if shouldSegue {
                 self.performSegue(withIdentifier: K.Segue.goToLoginView, sender: self)
             }

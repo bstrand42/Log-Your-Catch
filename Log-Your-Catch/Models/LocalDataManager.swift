@@ -9,9 +9,9 @@
 import Foundation
 import CoreData
 
+var fishArray = [CaughtFish]()
+
 class LocalDataManager {
-    
-    var fishArray = [CaughtFish]()
     
     var context: NSManagedObjectContext?
     
@@ -25,7 +25,7 @@ class LocalDataManager {
     }
     
     func createRecord(_ released: Bool, _ fishType: String, _ len: Float, _ locLogging: Bool, _ currentLatitude: Double, _ currentLongitude: Double) {
-        
+        if coreDataDebug { print("entering createRecord") }
         let thisFish = CaughtFish(context: context!)
         
         thisFish.date = getDate()
@@ -61,20 +61,6 @@ class LocalDataManager {
             if coreDataDebug { print("Error fetching data from context: \(error)") }
             return("Error fetching data from context: \(error)")
         }
-    }
-    
-    func readFish() -> [CaughtFish] {
-        
-        let request : NSFetchRequest <CaughtFish> = CaughtFish.fetchRequest()
-        do {
-            fishArray = try context!.fetch(request) //this is failing to unwrap, causing a fatal error.
-            if coreDataDebug { print("count of records read = \(fishArray.count)") }
-        } catch {
-            if coreDataDebug { print("Error fetching data from context: \(error)") }
-        }
-        
-        return fishArray
-        
     }
     
 }

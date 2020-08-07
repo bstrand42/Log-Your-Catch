@@ -20,7 +20,6 @@ let attemptToUploadCasesDebug = true
 
 //MARK: - Konstants
 
-
 struct K {
     
     struct Segue {

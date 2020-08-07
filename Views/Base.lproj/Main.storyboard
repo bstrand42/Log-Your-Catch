@@ -183,17 +183,10 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkD-hn-MNL">
-                                        <rect key="frame" x="0.0" y="610" width="414" height="128"/>
+                                        <rect key="frame" x="0.0" y="610" width="414" height="158"/>
                                         <state key="normal" title="Show Current Location on Map"/>
                                         <connections>
                                             <action selector="showCurrentLocationOnMap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZxH-ba-iLA"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbT-HT-aIc">
-                                        <rect key="frame" x="0.0" y="738" width="414" height="30"/>
-                                        <state key="normal" title="ForceLogin"/>
-                                        <connections>
-                                            <action selector="forceLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S0D-fr-XX1"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="awT-79-q77">
