@@ -111,8 +111,6 @@ class ViewController: UIViewController {
         
         let date = getDate()
         var rstring = ""
-        var latitude = 0.0
-        var longitude = 0.0
         
         if (self.fishType == K.FishType.nilFish) {
             self.logLabel.text = "Please select species!"
