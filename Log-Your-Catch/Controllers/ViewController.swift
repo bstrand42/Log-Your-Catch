@@ -147,7 +147,7 @@ class ViewController: UIViewController {
         } else {
             rstring = "kept"
         }
-        self.topLogLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date)"
+        self.topLogLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date)\n line 2"
         if locLogging {
             self.bottomLogLabel.text = "at location (\(latitude),\(longitude))"
         } else {
