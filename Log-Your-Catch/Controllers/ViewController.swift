@@ -111,6 +111,8 @@ class ViewController: UIViewController {
         
         let date = getDate()
         var rstring = ""
+        var latitude = 0.0
+        var longitude = 0.0
         
         if (self.fishType == K.FishType.nilFish) {
             self.logLabel.text = "Please select species!"
@@ -133,8 +135,8 @@ class ViewController: UIViewController {
                 localDataManager.saveFish()
         } else {
             localDataManager.createRecord(released, fishType, len, locLogging, 0.0, 0.0)
-                localDataManager.saveFish()
         }
+        localDataManager.saveFish()
         
         if released == true {
             rstring = "released"
