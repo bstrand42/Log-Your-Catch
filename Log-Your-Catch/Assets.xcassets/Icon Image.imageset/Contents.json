@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Untitled design.png 22-13-44-255.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Untitled design.png 22-13-44-255@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Untitled design.png 22-13-44-255@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
