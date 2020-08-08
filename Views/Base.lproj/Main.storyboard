@@ -247,6 +247,7 @@
                         <outlet property="lenLabel" destination="UR9-RA-AY0" id="XKT-Cq-7Pr"/>
                         <outlet property="localRecords" destination="bbu-XW-zfy" id="89c-2E-1Gd"/>
                         <outlet property="logLabel" destination="OWG-Hc-owu" id="4CM-rB-NWW"/>
+                        <outlet property="mapButton" destination="hkD-hn-MNL" id="4Ur-OX-7ff"/>
                         <outlet property="slider" destination="jF1-8e-vY9" id="XER-83-Mx9"/>
                         <outlet property="striperButton" destination="22h-lP-TZB" id="iJX-hn-67c"/>
                         <segue destination="AlA-dY-rwO" kind="presentation" identifier="goToLoginView" id="bJr-dW-hck"/>

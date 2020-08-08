@@ -36,6 +36,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var logLabel: UILabel!
     @IBOutlet weak var striperButton: UIButton!
     @IBOutlet weak var bluefishButton: UIButton!
+    @IBOutlet weak var mapButton: UIButton!
+    
     
 //MARK: - Global Variables
     
@@ -52,6 +54,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mapButton.isHidden = true
         
         locationManager.delegate = self
         localDataManager.context = context
