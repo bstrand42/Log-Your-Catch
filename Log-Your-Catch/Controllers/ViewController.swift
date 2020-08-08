@@ -33,8 +33,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lenLabel: UILabel!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var localRecords: UILabel!
-    @IBOutlet weak var topLogLabel: UILabel!
-    @IBOutlet weak var bottomLogLabel: UILabel!
+    @IBOutlet weak var logLabel: UILabel!
     @IBOutlet weak var striperButton: UIButton!
     @IBOutlet weak var bluefishButton: UIButton!
     
@@ -79,7 +78,7 @@ class ViewController: UIViewController {
         self.fishType = K.FishType.striper
         setAlphas(stripers: 1.0, bluefish: 0.3)
         // clear any messages that may be lingering
-        self.topLogLabel.text = ""
+        self.logLabel.text = ""
     }
 
     @IBAction func bluefishPressed(_ sender: Any) {
@@ -87,7 +86,7 @@ class ViewController: UIViewController {
         self.fishType = K.FishType.bluefish
         setAlphas(stripers: 0.3, bluefish: 1.0)
         // clear any messages that may be lingering
-        self.topLogLabel.text = ""
+        self.logLabel.text = ""
     }
     
     // toggle whether location logging is desired
@@ -113,8 +112,7 @@ class ViewController: UIViewController {
         var rstring = ""
         
         if (self.fishType == K.FishType.nilFish) {
-            self.topLogLabel.text = "Please select species!"
-            self.bottomLogLabel.text = ""
+            self.logLabel.text = "Please select species!"
             return
         } else {
             if UIDebug { print("fishtype = \(self.fishType)") }
@@ -130,20 +128,20 @@ class ViewController: UIViewController {
         if locLogging {
             locationManager.requestLocation()
               
-            localDataManager.createRecord(released, fishType, len, locLogging, (currentLocation?.coordinate.latitude)!, (currentLocation?.coordinate.longitude)!)
+            localDataManager.createRecord(released, fishType, len, locLogging, (currentLocation?.coordinate.latitude) ?? 0.0, (currentLocation?.coordinate.longitude) ?? 0.0)
                 localDataManager.saveFish()
         } else {
             localDataManager.createRecord(released, fishType, len, locLogging, 0.0, 0.0)
                 localDataManager.saveFish()
         }
         
-        self.topLogLabel.text = "\(len)\u{22} \(fishType) caught at \(date)"
         if released == true {
             rstring = "released"
         } else {
             rstring = "kept"
         }
-        self.bottomLogLabel.text = "\(rstring) at \(String(describing: currentLocation?.coordinate.latitude))!, \(String(describing: currentLocation?.coordinate.longitude))!"
+        
+        self.logLabel.text = "\(len)\u{22} \(fishType) caught at \(date) \n\(rstring) at \(String(describing: currentLocation?.coordinate.latitude))!, \(String(describing: currentLocation?.coordinate.longitude))!"
 
         
         setAlphas(stripers: 1.0, bluefish: 1.0)
