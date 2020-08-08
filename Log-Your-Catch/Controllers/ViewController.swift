@@ -81,6 +81,7 @@ class ViewController: UIViewController {
         setAlphas(stripers: 1.0, bluefish: 0.3)
         // clear any messages that may be lingering
         self.topLogLabel.text = ""
+        self.bottomLogLabel.text = ""
     }
 
     @IBAction func bluefishPressed(_ sender: Any) {
@@ -89,6 +90,7 @@ class ViewController: UIViewController {
         setAlphas(stripers: 0.3, bluefish: 1.0)
         // clear any messages that may be lingering
         self.topLogLabel.text = ""
+        self.bottomLogLabel.text = ""
     }
     
     // toggle whether location logging is desired
@@ -112,6 +114,8 @@ class ViewController: UIViewController {
         
         let date = getDate()
         var rstring = ""
+        var latitude = 0.0
+        var longitude = 0.0
         
         if (self.fishType == K.FishType.nilFish) {
             self.topLogLabel.text = "Please select species!"
@@ -130,21 +134,25 @@ class ViewController: UIViewController {
         
         if locLogging {
             locationManager.requestLocation()
-              
-            localDataManager.createRecord(released, fishType, len, locLogging, (currentLocation?.coordinate.latitude)!, (currentLocation?.coordinate.longitude)!)
-                localDataManager.saveFish()
+            latitude = (currentLocation?.coordinate.latitude)!
+            longitude = (currentLocation?.coordinate.longitude)!
+            localDataManager.createRecord(released, fishType, len, locLogging, latitude, longitude)
         } else {
             localDataManager.createRecord(released, fishType, len, locLogging, 0.0, 0.0)
-                localDataManager.saveFish()
         }
+        localDataManager.saveFish()
         
-        self.topLogLabel.text = "\(len)\u{22} \(fishType) caught at \(date)"
         if released == true {
             rstring = "released"
         } else {
             rstring = "kept"
         }
-        self.bottomLogLabel.text = "\(rstring) at \(String(describing: currentLocation?.coordinate.latitude))!, \(String(describing: currentLocation?.coordinate.longitude))!"
+        self.topLogLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date)"
+        if locLogging {
+            self.bottomLogLabel.text = "at location (\(latitude),\(longitude))"
+        } else {
+            self.bottomLogLabel.text = ""
+        }
 
         
         setAlphas(stripers: 1.0, bluefish: 1.0)
