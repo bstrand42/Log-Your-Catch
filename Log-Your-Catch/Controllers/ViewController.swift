@@ -63,6 +63,7 @@ class ViewController: UIViewController {
         localRecords.text = localDataManager.readFish()
         
         locationManager.requestWhenInUseAuthorization()
+        
         locationManager.requestLocation()
 
     }
