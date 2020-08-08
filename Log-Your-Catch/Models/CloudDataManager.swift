@@ -22,10 +22,9 @@ class CloudDataManager {
     func uploadToCloud(array: [CaughtFish], saveFunc: @escaping() -> Void, completion: @escaping(_ shouldSegue: Bool) -> Void) {
         
         if authenticationManager.checkLoginInput() {
-            
+            if attemptToUploadCasesDebug { print("already logged in") }
             performUpload()
             clearLocalData(array, saveFunc)
-            if attemptToUploadCasesDebug { print("already logged in") }
             completion(false)
             
         } else {
@@ -61,10 +60,12 @@ class CloudDataManager {
     
     func performUpload() {
         
+        var count = 0
+        
         if let logger = Auth.auth().currentUser?.email {
             
             for fish in fishArray {
-                
+                count += 1
                 db.collection(K.FStore.collectionName).addDocument(data: [
                     K.FStore.fishTypeField: fish.species ?? "",
                     K.FStore.lengthField: fish.length,
@@ -76,6 +77,7 @@ class CloudDataManager {
                     
                 ])
             }
+            print("sent \(count) fish records to Firestore")
         } else {
             if firestoreDebug { print("couldn't find user, so no upload") }
         }

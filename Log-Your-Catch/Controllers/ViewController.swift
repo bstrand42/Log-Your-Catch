@@ -11,6 +11,15 @@ import CoreLocation
 import CoreData
 import Firebase
 
+func getDate() -> String {
+    let date = Date()
+    let format = DateFormatter()
+    format.dateFormat = K.dateFormat
+    let formattedDate = format.string(from: date)
+    // print(formattedDate)
+    return(formattedDate)
+}
+
 class ViewController: UIViewController {
 
 //MARK: - Managers
@@ -99,6 +108,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func doneButton(_ sender: Any) {
+        
+        let date = getDate()
+        var rstring = ""
+        
         if (self.fishType == K.FishType.nilFish) {
             self.topLogLabel.text = "Please select species!"
             self.bottomLogLabel.text = ""
@@ -107,14 +120,36 @@ class ViewController: UIViewController {
             if UIDebug { print("fishtype = \(self.fishType)") }
         }
         
+        /*
         if locLogging { locationManager.requestLocation() }
         
         localDataManager.createRecord(released, fishType, len, locLogging, (currentLocation?.coordinate.latitude)!, (currentLocation?.coordinate.longitude)!)
             localDataManager.saveFish()
+        */
+        
+        if locLogging {
+            locationManager.requestLocation()
+              
+            localDataManager.createRecord(released, fishType, len, locLogging, (currentLocation?.coordinate.latitude)!, (currentLocation?.coordinate.longitude)!)
+                localDataManager.saveFish()
+        } else {
+            localDataManager.createRecord(released, fishType, len, locLogging, 0.0, 0.0)
+                localDataManager.saveFish()
+        }
+        
+        self.topLogLabel.text = "\(len)\u{22} \(fishType) caught at \(date)"
+        if released == true {
+            rstring = "released"
+        } else {
+            rstring = "kept"
+        }
+        self.bottomLogLabel.text = "\(rstring) at \(String(describing: currentLocation?.coordinate.latitude))!, \(String(describing: currentLocation?.coordinate.longitude))!"
+
         
         setAlphas(stripers: 1.0, bluefish: 1.0)
         fishType = K.FishType.nilFish
         
+        // updates the count of locally stored records
         localRecords.text = localDataManager.readFish()
     }
     
@@ -153,6 +188,7 @@ class ViewController: UIViewController {
         striperButton.alpha = striperAlpha
         bluefishButton.alpha = bluefishAlpha
     }
+
 
 //MARK: - Prepare for Segues
     

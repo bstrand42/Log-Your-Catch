@@ -14,7 +14,7 @@ var fishArray = [CaughtFish]()
 class LocalDataManager {
     
     var context: NSManagedObjectContext?
-    
+    /*
     func getDate() -> String {
         let date = Date()
         let format = DateFormatter()
@@ -23,6 +23,7 @@ class LocalDataManager {
         // print(formattedDate)
         return(formattedDate)
     }
+    */
     
     func createRecord(_ released: Bool, _ fishType: String, _ len: Float, _ locLogging: Bool, _ currentLatitude: Double, _ currentLongitude: Double) {
         if coreDataDebug { print("entering createRecord") }

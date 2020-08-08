@@ -31,6 +31,16 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         if let email = emailField.text, let password = passwordField.text {
+            if saveCredentials == true {
+                  // TODO: handle the case where either string is nil
+                  defaults.set(self.emailField.text, forKey: K.CoreDataCredentials.userKey)
+                  defaults.set(self.passwordField.text, forKey: K.CoreDataCredentials.passwordKey)
+                  if loginDebug { print("saved user credentials") }
+              } else {
+                if loginDebug { print("set user credentials to empty strings") }
+                  defaults.set("", forKey: K.CoreDataCredentials.userKey)
+                  defaults.set("", forKey: K.CoreDataCredentials.passwordKey)
+              }
             authenticationManager.attemptLogin(email, password) { (shouldSegue) in
                 self.dismiss(animated: true, completion: nil)
             }

@@ -14,8 +14,13 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        FirebaseApp.configure()
+        //FirebaseApp.configure()
         return true
+    }
+    
+    override init () {
+        super.init()
+        FirebaseApp.configure()
     }
     
     var window: UIWindow?
@@ -23,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         
-        
+        //FirebaseApp.configure()
         let db = Firestore.firestore()
         
         return true
