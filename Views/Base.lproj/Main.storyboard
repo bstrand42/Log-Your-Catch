@@ -34,7 +34,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ch7-Dr-2qS">
                                         <rect key="frame" x="0.0" y="0.0" width="20" height="49.5"/>
-                                        <color key="backgroundColor" name="Background Color"/>
+                                        <color key="backgroundColor" name="Main Background Color"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="rVn-e2-RBu"/>
                                         </constraints>
@@ -83,7 +83,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" name="Background Color"/>
+                                                <color key="backgroundColor" name="Main Background Color"/>
                                                 <constraints>
                                                     <constraint firstItem="22h-lP-TZB" firstAttribute="centerX" secondItem="KMo-wm-FEI" secondAttribute="centerX" id="1x7-v1-Rv4"/>
                                                     <constraint firstItem="22h-lP-TZB" firstAttribute="centerY" secondItem="KMo-wm-FEI" secondAttribute="centerY" id="gYx-5D-qqM"/>
@@ -103,7 +103,7 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" name="Background Color"/>
+                                                <color key="backgroundColor" name="Main Background Color"/>
                                                 <constraints>
                                                     <constraint firstItem="dZi-ow-UCZ" firstAttribute="centerY" secondItem="hpI-hE-7le" secondAttribute="centerY" id="Pz8-Gm-hDj"/>
                                                     <constraint firstItem="dZi-ow-UCZ" firstAttribute="centerX" secondItem="hpI-hE-7le" secondAttribute="centerX" id="mqY-ac-ZEV"/>
@@ -132,7 +132,7 @@
                                                         </connections>
                                                     </slider>
                                                 </subviews>
-                                                <color key="backgroundColor" name="Background Color"/>
+                                                <color key="backgroundColor" name="Main Background Color"/>
                                             </view>
                                         </subviews>
                                     </stackView>
@@ -157,7 +157,7 @@
                                                         </connections>
                                                     </switch>
                                                 </subviews>
-                                                <color key="backgroundColor" name="Background Color"/>
+                                                <color key="backgroundColor" name="Main Background Color"/>
                                                 <constraints>
                                                     <constraint firstItem="c7m-P1-lci" firstAttribute="centerY" secondItem="1AV-Pb-d2u" secondAttribute="centerY" id="DqF-uu-rZO"/>
                                                     <constraint firstItem="c7m-P1-lci" firstAttribute="top" secondItem="4vw-Ci-0SM" secondAttribute="bottom" constant="1" id="cM8-Mq-hkf"/>
@@ -184,7 +184,7 @@
                                                         </connections>
                                                     </switch>
                                                 </subviews>
-                                                <color key="backgroundColor" name="Background Color"/>
+                                                <color key="backgroundColor" name="Main Background Color"/>
                                                 <constraints>
                                                     <constraint firstItem="uLw-xm-Ugb" firstAttribute="centerX" secondItem="SL7-U0-eQM" secondAttribute="centerX" id="8O4-2b-GBz"/>
                                                     <constraint firstItem="uLw-xm-Ugb" firstAttribute="centerY" secondItem="SL7-U0-eQM" secondAttribute="centerY" id="P54-Kh-g3B"/>
@@ -208,7 +208,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" name="Background Color"/>
+                                        <color key="backgroundColor" name="Main Background Color"/>
                                         <constraints>
                                             <constraint firstItem="hDO-vm-xKE" firstAttribute="centerX" secondItem="ZFp-2S-R3v" secondAttribute="centerX" id="Uya-uc-ecU"/>
                                             <constraint firstItem="hDO-vm-xKE" firstAttribute="centerY" secondItem="ZFp-2S-R3v" secondAttribute="centerY" id="yMe-L8-6ZB"/>
@@ -223,7 +223,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="Background Color"/>
+                        <color key="backgroundColor" name="Main Background Color"/>
                         <constraints>
                             <constraint firstItem="6CZ-sT-Gax" firstAttribute="trailing" secondItem="awT-79-q77" secondAttribute="trailing" id="4Lp-je-0VQ"/>
                             <constraint firstItem="pkG-vL-XcD" firstAttribute="leading" secondItem="6CZ-sT-Gax" secondAttribute="leading" id="6RB-7Z-Bkp"/>
@@ -338,7 +338,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" name="Background Color"/>
+                                        <color key="backgroundColor" name="Main Background Color"/>
                                         <constraints>
                                             <constraint firstItem="yEC-Qi-AWg" firstAttribute="top" secondItem="Dgs-6X-v03" secondAttribute="bottom" constant="10" id="Ltq-vY-jKa"/>
                                             <constraint firstItem="yEC-Qi-AWg" firstAttribute="centerY" secondItem="Ec5-tW-aHf" secondAttribute="centerY" id="MLV-fu-h0G"/>
@@ -355,7 +355,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" name="Background Color"/>
+                        <color key="backgroundColor" name="Main Background Color"/>
                         <constraints>
                             <constraint firstItem="orA-x4-KgP" firstAttribute="centerX" secondItem="FjG-Sb-pBE" secondAttribute="centerX" id="4pR-MH-tTZ"/>
                             <constraint firstItem="SlY-lD-c6z" firstAttribute="bottom" secondItem="pFr-h0-hUl" secondAttribute="bottom" constant="50" id="RUr-KO-9AH"/>
@@ -406,7 +406,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="Background Color"/>
+                        <color key="backgroundColor" name="Main Background Color"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Gje-Gk-Pbc" secondAttribute="bottom" id="6tO-2j-wey"/>
                             <constraint firstItem="Gje-Gk-Pbc" firstAttribute="trailing" secondItem="guc-8n-9hm" secondAttribute="trailing" id="Bwb-TQ-svX"/>
@@ -549,7 +549,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" name="Background Color"/>
+                                        <color key="backgroundColor" name="Main Background Color"/>
                                         <constraints>
                                             <constraint firstItem="TmX-Gn-7C4" firstAttribute="centerX" secondItem="8VK-mF-xsP" secondAttribute="centerX" id="5jZ-2A-jCw"/>
                                             <constraint firstItem="Ebt-0O-7y5" firstAttribute="centerX" secondItem="8VK-mF-xsP" secondAttribute="centerX" id="GCO-DO-G1i"/>
@@ -560,7 +560,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" name="Background Color"/>
+                        <color key="backgroundColor" name="Main Background Color"/>
                         <constraints>
                             <constraint firstItem="L17-vg-m10" firstAttribute="leading" secondItem="5aL-E9-9JL" secondAttribute="leading" constant="50" id="9LU-af-oyO"/>
                             <constraint firstItem="5aL-E9-9JL" firstAttribute="bottom" secondItem="L17-vg-m10" secondAttribute="bottom" constant="50" id="I0I-qU-1x6"/>
@@ -594,10 +594,13 @@
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Button Color">
-            <color red="0.24699999392032623" green="0.75700002908706665" blue="0.78799998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.19607843137254902" green="0.50980392156862742" blue="0.72156862745098038" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Main Background Color">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Text Color">
-            <color red="0.21199999749660492" green="0.31000000238418579" blue="0.41999998688697815" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10588235294117647" green="0.14901960784313725" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
