@@ -26,7 +26,8 @@ class CloudDataManager {
             performUpload()
             // TODO:  I think we should consider making this optional
             clearLocalData(array, saveFunc)
-            completion(true)    
+            completion(false)
+            
         } else {
             let user = defaults.string(forKey: "User") ?? ""
             let password = defaults.string(forKey: "Password") ?? ""
@@ -43,7 +44,7 @@ class CloudDataManager {
                         self.performUpload()
                         // TODO: I think we should consider making this optional
                         self.clearLocalData(array, saveFunc)
-                        completion(true)
+                        completion(false)
                     } else {
                         if attemptToUploadCasesDebug { print("error logging in") }
                         completion(true)
