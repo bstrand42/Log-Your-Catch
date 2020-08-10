@@ -24,9 +24,9 @@ class CloudDataManager {
         if authenticationManager.checkLoginInput() {
             if attemptToUploadCasesDebug { print("already logged in") }
             performUpload()
+            // TODO:  I think we should consider making this optional
             clearLocalData(array, saveFunc)
-            completion(true)
-            
+            completion(true)    
         } else {
             let user = defaults.string(forKey: "User") ?? ""
             let password = defaults.string(forKey: "Password") ?? ""
@@ -41,6 +41,7 @@ class CloudDataManager {
                     if success {
                         if attemptToUploadCasesDebug { print("logged in from local data") }
                         self.performUpload()
+                        // TODO: I think we should consider making this optional
                         self.clearLocalData(array, saveFunc)
                         completion(true)
                     } else {
@@ -86,6 +87,8 @@ class CloudDataManager {
     func clearLocalData(_ array: [CaughtFish], _ saveFunc: () -> Void) {
         
         var count = array.count
+        
+        // TODO:  Suggest a switch to make this optional
         
         if coreDataDebug || firestoreDebug { print("clearLocalData called: record count = \(array.count)") }
         
