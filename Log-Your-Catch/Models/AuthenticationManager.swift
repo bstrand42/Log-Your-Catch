@@ -28,7 +28,7 @@ struct AuthenticationManager {
         if Auth.auth().currentUser == nil {
             return false
         } else {
-            return false
+            return true
         }
         
     }

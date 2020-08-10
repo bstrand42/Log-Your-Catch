@@ -25,7 +25,7 @@ class CloudDataManager {
             if attemptToUploadCasesDebug { print("already logged in") }
             performUpload()
             clearLocalData(array, saveFunc)
-            completion(true)
+            completion(false)
             
         } else {
             let user = defaults.string(forKey: "User") ?? ""
@@ -42,7 +42,7 @@ class CloudDataManager {
                         if attemptToUploadCasesDebug { print("logged in from local data") }
                         self.performUpload()
                         self.clearLocalData(array, saveFunc)
-                        completion(true)
+                        completion(false)
                     } else {
                         if attemptToUploadCasesDebug { print("error logging in") }
                         completion(true)
