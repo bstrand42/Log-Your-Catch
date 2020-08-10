@@ -115,6 +115,8 @@ class ViewController: UIViewController {
         
         let date = getDate()
         var rstring = ""
+        var latitude = 0.0
+        var longitude = 0.0
         
         if (self.fishType == K.FishType.nilFish) {
             self.logLabel.text = "Please select species!"
@@ -132,12 +134,13 @@ class ViewController: UIViewController {
         
         if locLogging {
             locationManager.requestLocation()
-              
-            localDataManager.createRecord(released, fishType, len, locLogging, (currentLocation?.coordinate.latitude) ?? 0.0, (currentLocation?.coordinate.longitude) ?? 0.0)
-                localDataManager.saveFish()
+            latitude = (currentLocation?.coordinate.latitude)!
+            longitude = (currentLocation?.coordinate.longitude)!
         } else {
-            localDataManager.createRecord(released, fishType, len, locLogging, 0.0, 0.0)
+            latitude = 0.0
+            longitude = 0.0
         }
+        localDataManager.createRecord(released, fishType, len, locLogging, latitude, longitude)
         localDataManager.saveFish()
         
         if released == true {
@@ -146,9 +149,13 @@ class ViewController: UIViewController {
             rstring = "kept"
         }
         
-        self.logLabel.text = "\(len)\u{22} \(fishType) caught at \(date) \n\(rstring) at \(String(describing: currentLocation?.coordinate.latitude))!, \(String(describing: currentLocation?.coordinate.longitude))!"
+        if locLogging {
+            self.logLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date) \nLocation (\(latitude), \(longitude))"
+        } else {
+            self.logLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date)"
+        }
 
-        
+        // TODO: I think the following two lines of code should be removed.  Nice not to have to select fish type every time...
         setAlphas(stripers: 1.0, bluefish: 1.0)
         fishType = K.FishType.nilFish
         
