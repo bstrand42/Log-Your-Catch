@@ -151,7 +151,7 @@
                                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c7m-P1-lci">
                                                         <rect key="frame" x="70.5" y="53.5" width="51" height="31"/>
                                                         <color key="onTintColor" name="Button Color"/>
-                                                        <color key="thumbTintColor" name="Background Color"/>
+                                                        <color key="thumbTintColor" name="Main Background Color"/>
                                                         <connections>
                                                             <action selector="releasedButton:" destination="BYZ-38-t0r" eventType="valueChanged" id="3WF-Z4-sEb"/>
                                                         </connections>
@@ -178,7 +178,7 @@
                                                         <rect key="frame" x="70.5" y="53.5" width="51" height="31"/>
                                                         <color key="tintColor" name="Button Color"/>
                                                         <color key="onTintColor" name="Button Color"/>
-                                                        <color key="thumbTintColor" name="Background Color"/>
+                                                        <color key="thumbTintColor" name="Main Background Color"/>
                                                         <connections>
                                                             <action selector="loggingButton:" destination="BYZ-38-t0r" eventType="valueChanged" id="Nmn-NG-bbf"/>
                                                         </connections>
