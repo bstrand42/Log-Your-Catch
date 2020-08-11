@@ -64,6 +64,9 @@ class CloudDataManager {
         
         var count = 0
         
+        // TODO: perhaps this is causing an unnecessary call/read to Firestore?
+        // If we are already logged in, we know who the user is...no need to ask Firestore
+        
         if let logger = Auth.auth().currentUser?.email {
             
             for fish in fishArray {
@@ -78,11 +81,20 @@ class CloudDataManager {
                     K.FStore.dateField: fish.date ?? ""
                     
                 ])
+                
+                // TODO:  can the addDocument() call ever fail?
+                
             }
+            // TODO: here's where we would give visual feedback to user that their
+            // data had been successfully sent to cloud
+            
+            // TODO: make these two into Debug prints?
             print("sent \(count) fish records to Firestore")
         } else {
             if firestoreDebug { print("couldn't find user, so no upload") }
         }
+        
+
     }
     
     func clearLocalData(_ array: [CaughtFish], _ saveFunc: () -> Void) {
