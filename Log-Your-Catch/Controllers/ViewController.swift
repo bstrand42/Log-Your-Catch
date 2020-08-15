@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     var released = true
     var locLogging = true
     var currentLocation: CLLocation?
-    var shouldSave: Bool = false
+    var shouldSaveLocally: Bool = false
     var rstring = ""
     var date = getDate()
     
@@ -140,19 +140,16 @@ class ViewController: UIViewController {
         }
         
         if locLogging {
-            shouldSave = true
+            shouldSaveLocally = true
             locationManager.requestLocation()
         } else {
             localDataManager.createRecord(released, fishType, len, locLogging, 0.0, 0.0)
             localDataManager.saveFish()
             self.logLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date)"
+            // updates the count of locally stored records
+            localRecords.text = localDataManager.readFish()
         }
         
-        setAlphas(stripers: 1.0, bluefish: 1.0)
-        fishType = K.FishType.nilFish
-        
-        // updates the count of locally stored records
-        localRecords.text = localDataManager.readFish()
     }
     
     @IBAction func uploadPressed(_ sender: Any) {
@@ -240,12 +237,13 @@ extension ViewController: CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             currentLocation = location
             
-            if locationDebug { print(shouldSave) }
-            if shouldSave {
+            if locationDebug { print(shouldSaveLocally) }
+            if shouldSaveLocally {
                 localDataManager.createRecord(released, fishType, len, locLogging, (currentLocation?.coordinate.latitude) ?? 0.0, (currentLocation?.coordinate.longitude) ?? 0.0)
                 localDataManager.saveFish()
                 self.logLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date) \nLocation: (\((currentLocation?.coordinate.latitude) ?? 0.0), \((currentLocation?.coordinate.longitude) ?? 0.0))"
-                shouldSave = false
+                self.localRecords.text = localDataManager.readFish()
+                shouldSaveLocally = false
             }
             
             if locationDebug { print("location in locationManager = \(String(describing: currentLocation))") }
