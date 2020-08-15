@@ -139,6 +139,8 @@ class ViewController: UIViewController {
             rstring = "kept"
         }
         
+        logLabel.text = "Saving..."
+        
         if locLogging {
             shouldSaveLocally = true
             locationManager.requestLocation()
@@ -155,6 +157,7 @@ class ViewController: UIViewController {
     @IBAction func uploadPressed(_ sender: Any) {
         var count = 0
         localRecords.text = localDataManager.readFish()
+        logLabel.text = "Uploading..."
         count = fishArray.count
         if coreDataDebug { print("\(count) local records found") }
         cloudDataManager.uploadToCloud(array: fishArray, saveFunc: localDataManager.saveFish) { (shouldSegue) in
