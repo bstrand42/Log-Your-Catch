@@ -111,6 +111,7 @@
                                             <slider autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" horizontalCompressionResistancePriority="748" verticalCompressionResistancePriority="748" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="10" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="jF1-8e-vY9">
                                                 <rect key="frame" x="48" y="44" width="279" height="31"/>
                                                 <color key="tintColor" name="Button Color"/>
+                                                <color key="thumbTintColor" name="Button Color"/>
                                                 <connections>
                                                     <action selector="lenSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="mai-Tx-iSS"/>
                                                 </connections>
@@ -122,7 +123,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" name="Main Background Color"/>
                                         <constraints>
                                             <constraint firstItem="jF1-8e-vY9" firstAttribute="top" secondItem="UR9-RA-AY0" secondAttribute="bottom" constant="5" id="Crs-WP-4NY"/>
                                             <constraint firstItem="jF1-8e-vY9" firstAttribute="centerY" secondItem="KLM-kC-DAD" secondAttribute="centerY" id="QHO-v0-UeH"/>
@@ -390,7 +391,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gFD-Lx-ACZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="39.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <items>
                                             <navigationItem id="9qz-4T-Zs1">
                                                 <barButtonItem key="leftBarButtonItem" systemItem="done" id="q0W-yk-reF">
@@ -403,7 +404,7 @@
                                         </items>
                                     </navigationBar>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsPointsOfInterest="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0n5-AF-f6K">
-                                        <rect key="frame" x="0.0" y="39.5" width="375" height="627.5"/>
+                                        <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                     </mapView>
                                 </subviews>
                             </stackView>
