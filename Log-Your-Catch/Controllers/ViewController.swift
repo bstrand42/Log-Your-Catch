@@ -46,6 +46,9 @@ class ViewController: UIViewController {
     var released = true
     var locLogging = true
     var currentLocation: CLLocation?
+    var shouldSave: Bool = false
+    var rstring = ""
+    var date = getDate()
     
 //singleton of current running context
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -113,8 +116,8 @@ class ViewController: UIViewController {
     
     @IBAction func doneButton(_ sender: Any) {
         
-        let date = getDate()
-        var rstring = ""
+        date = getDate()
+        
         
         if (self.fishType == K.FishType.nilFish) {
             self.logLabel.text = "Please select species!"
@@ -131,22 +134,20 @@ class ViewController: UIViewController {
         */
         
         if locLogging {
+            shouldSave = true
             locationManager.requestLocation()
-              
-            localDataManager.createRecord(released, fishType, len, locLogging, (currentLocation?.coordinate.latitude) ?? 0.0, (currentLocation?.coordinate.longitude) ?? 0.0)
-                localDataManager.saveFish()
         } else {
             localDataManager.createRecord(released, fishType, len, locLogging, 0.0, 0.0)
+            localDataManager.saveFish()
         }
-        localDataManager.saveFish()
-        
+
         if released == true {
             rstring = "released"
         } else {
             rstring = "kept"
         }
         
-        self.logLabel.text = "\(len)\u{22} \(fishType) caught at \(date) \n\(rstring) at \(String(describing: currentLocation?.coordinate.latitude))!, \(String(describing: currentLocation?.coordinate.longitude))!"
+        self.logLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date)"
 
         
         setAlphas(stripers: 1.0, bluefish: 1.0)
@@ -239,9 +240,15 @@ extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             locationManager.stopUpdatingLocation()
-            // Update currentLocation for use in the MapView
             currentLocation = location
             
+            print(shouldSave)
+            if shouldSave {
+                localDataManager.createRecord(released, fishType, len, locLogging, (currentLocation?.coordinate.latitude) ?? 0.0, (currentLocation?.coordinate.longitude) ?? 0.0)
+                localDataManager.saveFish()
+                self.logLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date) \nLocation (\((currentLocation?.coordinate.latitude) ?? 0.0), \((currentLocation?.coordinate.longitude) ?? 0.0))"
+            }
+            shouldSave = false
             if locationDebug { print("location in locationManager = \(String(describing: currentLocation))") }
         }
     }
