@@ -133,22 +133,20 @@ class ViewController: UIViewController {
             localDataManager.saveFish()
         */
         
-        if locLogging {
-            shouldSave = true
-            locationManager.requestLocation()
-        } else {
-            localDataManager.createRecord(released, fishType, len, locLogging, 0.0, 0.0)
-            localDataManager.saveFish()
-        }
-
         if released == true {
             rstring = "released"
         } else {
             rstring = "kept"
         }
         
-        self.logLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date)"
-
+        if locLogging {
+            shouldSave = true
+            locationManager.requestLocation()
+        } else {
+            localDataManager.createRecord(released, fishType, len, locLogging, 0.0, 0.0)
+            localDataManager.saveFish()
+            self.logLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date)"
+        }
         
         setAlphas(stripers: 1.0, bluefish: 1.0)
         fishType = K.FishType.nilFish
@@ -242,13 +240,14 @@ extension ViewController: CLLocationManagerDelegate {
             locationManager.stopUpdatingLocation()
             currentLocation = location
             
-            print(shouldSave)
+            if locationDebug { print(shouldSave) }
             if shouldSave {
                 localDataManager.createRecord(released, fishType, len, locLogging, (currentLocation?.coordinate.latitude) ?? 0.0, (currentLocation?.coordinate.longitude) ?? 0.0)
                 localDataManager.saveFish()
-                self.logLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date) \nLocation (\((currentLocation?.coordinate.latitude) ?? 0.0), \((currentLocation?.coordinate.longitude) ?? 0.0))"
+                self.logLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date) \nLocation: (\((currentLocation?.coordinate.latitude) ?? 0.0), \((currentLocation?.coordinate.longitude) ?? 0.0))"
+                shouldSave = false
             }
-            shouldSave = false
+            
             if locationDebug { print("location in locationManager = \(String(describing: currentLocation))") }
         }
     }
