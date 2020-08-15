@@ -46,6 +46,9 @@ class ViewController: UIViewController {
     var released = true
     var locLogging = true
     var currentLocation: CLLocation?
+    var shouldSaveLocally: Bool = false
+    var rstring = ""
+    var date = getDate()
     
 //singleton of current running context
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -113,10 +116,8 @@ class ViewController: UIViewController {
     
     @IBAction func doneButton(_ sender: Any) {
         
-        let date = getDate()
-        var rstring = ""
-        var latitude = 0.0
-        var longitude = 0.0
+        date = getDate()
+        
         
         if (self.fishType == K.FishType.nilFish) {
             self.logLabel.text = "Please select species!"
@@ -132,40 +133,31 @@ class ViewController: UIViewController {
             localDataManager.saveFish()
         */
         
-        if locLogging {
-            locationManager.requestLocation()
-            latitude = (currentLocation?.coordinate.latitude)!
-            longitude = (currentLocation?.coordinate.longitude)!
-        } else {
-            latitude = 0.0
-            longitude = 0.0
-        }
-        localDataManager.createRecord(released, fishType, len, locLogging, latitude, longitude)
-        localDataManager.saveFish()
-        
         if released == true {
             rstring = "released"
         } else {
             rstring = "kept"
         }
         
-        if locLogging {
-            self.logLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date) \nLocation (\(latitude), \(longitude))"
-        } else {
-            self.logLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date)"
-        }
-
-        // TODO: I think the following two lines of code should be removed.  Nice not to have to select fish type every time...
-        setAlphas(stripers: 1.0, bluefish: 1.0)
-        fishType = K.FishType.nilFish
+        logLabel.text = "Saving..."
         
-        // updates the count of locally stored records
-        localRecords.text = localDataManager.readFish()
+        if locLogging {
+            shouldSaveLocally = true
+            locationManager.requestLocation()
+        } else {
+            localDataManager.createRecord(released, fishType, len, locLogging, 0.0, 0.0)
+            localDataManager.saveFish()
+            self.logLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date)"
+            // updates the count of locally stored records
+            localRecords.text = localDataManager.readFish()
+        }
+        
     }
     
     @IBAction func uploadPressed(_ sender: Any) {
         var count = 0
         localRecords.text = localDataManager.readFish()
+        logLabel.text = "Uploading..."
         count = fishArray.count
         if coreDataDebug { print("\(count) local records found") }
         cloudDataManager.uploadToCloud(array: fishArray, saveFunc: localDataManager.saveFish) { (shouldSegue) in
@@ -246,8 +238,16 @@ extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             locationManager.stopUpdatingLocation()
-            // Update currentLocation for use in the MapView
             currentLocation = location
+            
+            if locationDebug { print(shouldSaveLocally) }
+            if shouldSaveLocally {
+                localDataManager.createRecord(released, fishType, len, locLogging, (currentLocation?.coordinate.latitude) ?? 0.0, (currentLocation?.coordinate.longitude) ?? 0.0)
+                localDataManager.saveFish()
+                self.logLabel.text = "\(len)\u{22} \(fishType) \(rstring) at \(date) \nLocation: (\((currentLocation?.coordinate.latitude) ?? 0.0), \((currentLocation?.coordinate.longitude) ?? 0.0))"
+                self.localRecords.text = localDataManager.readFish()
+                shouldSaveLocally = false
+            }
             
             if locationDebug { print("location in locationManager = \(String(describing: currentLocation))") }
         }
