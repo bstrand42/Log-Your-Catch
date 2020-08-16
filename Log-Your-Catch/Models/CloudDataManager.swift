@@ -64,6 +64,9 @@ class CloudDataManager {
         
         var count = 0
         
+        // TODO: this was put here to test getRecordsFromCloud() without UI changes
+        //getRecordsFromCloud()
+        
         // TODO: perhaps this is causing an unnecessary call/read to Firestore?
         // If we are already logged in, we know who the user is...no need to ask Firestore
         
@@ -93,9 +96,54 @@ class CloudDataManager {
         } else {
             if firestoreDebug { print("couldn't find user, so no upload") }
         }
-        
 
     }
+ 
+    
+    // Reads the data from Firestore.  This prints to debug log, but could do anything with the data
+    func getRecordsFromCloud () {
+        
+        var count = 0
+        var rstring = ""
+        
+        // This is done asynchronously...
+        db.collection(K.FStore.collectionName).getDocuments { (querySnapshot, error) in
+            if let e = error {
+                print("Error retrieving data from Firestore: \(e)")
+                return
+            } else {
+                if let snapshotDocuments = querySnapshot?.documents {
+                    for doc in snapshotDocuments {
+                        count += 1
+                        let data = doc.data()
+                        
+                        if let logger = data[K.FStore.loggerField],
+                            let date = data[K.FStore.dateField],
+                            let length = data[K.FStore.lengthField],
+                            let released = data[K.FStore.releasedField] as? Bool,  // otherwise just returns 0 or 1
+                            let species = data[K.FStore.fishTypeField],
+                            let latitude = data[K.FStore.latitudeField],
+                            let longitude = data[K.FStore.longitudeField]  {
+                            
+                            //print("released = \(released)")
+                            
+                            if (released == true) {
+                                rstring = "released"
+                            } else {
+                                rstring = "kept"
+                            }
+ 
+                            // print to debug log in CSV format
+                            print("\(date),\(logger),\(rstring),\(length),\(species),\(latitude),\(longitude)")
+                            
+                        } // end if
+                    }  // end for doc
+                } // end if let
+            } // end else
+        }  // end getDocuments
+    } // end func
+    
+    
     
     func clearLocalData(_ array: [CaughtFish], _ saveFunc: () -> Void) {
         
