@@ -42,6 +42,7 @@ struct K {
     
     struct FStore {
         static let collectionName = "fishCollection"
+        static let collectionTestName = "fishTestCollection"
         static let loggerField = "logger"
         static let latitudeField = "latitude"
         static let longitudeField = "longitude"

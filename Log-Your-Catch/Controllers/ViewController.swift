@@ -50,6 +50,10 @@ class ViewController: UIViewController {
     var rstring = ""
     var date = getDate()
     
+    // comment one of the following two lines out.  testMode == true, writes data to different "test" Firestore collection
+    let testMode: Bool = true
+    //let testMode: Bool = false
+    
 //singleton of current running context
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -160,7 +164,7 @@ class ViewController: UIViewController {
         logLabel.text = "Uploading..."
         count = fishArray.count
         if coreDataDebug { print("\(count) local records found") }
-        cloudDataManager.uploadToCloud(array: fishArray, saveFunc: localDataManager.saveFish) { (shouldSegue) in
+        cloudDataManager.uploadToCloud(testM: self.testMode, array: fishArray, saveFunc: localDataManager.saveFish) { (shouldSegue) in
             if shouldSegue {
                 self.performSegue(withIdentifier: K.Segue.goToLoginView, sender: self)
             }

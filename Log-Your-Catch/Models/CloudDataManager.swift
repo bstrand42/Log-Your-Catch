@@ -14,16 +14,18 @@ class CloudDataManager {
     
     let db = Firestore.firestore()
     
+    //let testMode = true
+    
     var context: NSManagedObjectContext?
     
     let authenticationManager = AuthenticationManager()
     let localDataManager = LocalDataManager()
     
-    func uploadToCloud(array: [CaughtFish], saveFunc: @escaping() -> Void, completion: @escaping(_ shouldSegue: Bool) -> Void) {
+    func uploadToCloud(testM: Bool, array: [CaughtFish], saveFunc: @escaping() -> Void, completion: @escaping(_ shouldSegue: Bool) -> Void) {
         
         if authenticationManager.checkLoginInput() {
             if attemptToUploadCasesDebug { print("already logged in") }
-            performUpload()
+            performUpload(testMode: testM)
             // TODO:  I think we should consider making this optional
             clearLocalData(array, saveFunc)
             completion(false)
@@ -41,7 +43,7 @@ class CloudDataManager {
                 authenticationManager.attemptLogin(user, password) { (success) in
                     if success {
                         if attemptToUploadCasesDebug { print("logged in from local data") }
-                        self.performUpload()
+                        self.performUpload(testMode: testM)
                         // TODO: I think we should consider making this optional
                         self.clearLocalData(array, saveFunc)
                         completion(false)
@@ -60,9 +62,16 @@ class CloudDataManager {
     
     
     
-    func performUpload() {
+    func performUpload(testMode: Bool) {
         
         var count = 0
+        var collectionName = ""
+        
+        if testMode == true {
+            collectionName = K.FStore.collectionTestName
+        } else {
+            collectionName = K.FStore.collectionName
+        }
         
         // TODO: this was put here to test getRecordsFromCloud() without UI changes
         //getRecordsFromCloud()
@@ -74,7 +83,8 @@ class CloudDataManager {
             
             for fish in fishArray {
                 count += 1
-                db.collection(K.FStore.collectionName).addDocument(data: [
+                //db.collection(K.FStore.collectionName).addDocument(data: [
+                db.collection(collectionName).addDocument(data: [
                     K.FStore.fishTypeField: fish.species ?? "",
                     K.FStore.lengthField: fish.length,
                     K.FStore.releasedField: fish.released,
@@ -99,7 +109,6 @@ class CloudDataManager {
 
     }
  
-    
     // Reads the data from Firestore.  This prints to debug log, but could do anything with the data
     func getRecordsFromCloud () {
         
