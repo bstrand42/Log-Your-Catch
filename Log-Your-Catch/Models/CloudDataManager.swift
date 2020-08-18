@@ -106,7 +106,7 @@ class CloudDataManager {
         } else {
             if firestoreDebug { print("couldn't find user, so no upload") }
         }
-
+        
     }
  
     // Reads the data from Firestore.  This prints to debug log, but could do anything with the data

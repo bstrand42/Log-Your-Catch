@@ -170,6 +170,7 @@ class ViewController: UIViewController {
             }
         }
         localRecords.text = localDataManager.readFish()
+        self.logLabel.text = ""
     }
     
 //MARK: - Other Functions
