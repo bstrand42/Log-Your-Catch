@@ -3,7 +3,7 @@
 //  Log-Your-Catch
 //
 //  Created by Bradley Strand on 7/27/20.
-//  Copyright © 2020 Strand. All rights reserved.
+//  Copyright © 2020-2021 Strand. All rights reserved.
 //
 
 import UIKit

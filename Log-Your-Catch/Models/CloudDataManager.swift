@@ -3,7 +3,7 @@
 //  Log-Your-Catch
 //
 //  Created by Liam Strand on 8/3/20.
-//  Copyright © 2020 Strand. All rights reserved.
+//  Copyright © 2020-2021 Strand. All rights reserved.
 //
 
 import Foundation
@@ -101,8 +101,7 @@ class CloudDataManager {
             // TODO: here's where we would give visual feedback to user that their
             // data had been successfully sent to cloud
             
-            // TODO: make these two into Debug prints?
-            print("sent \(count) fish records to Firestore")
+            if firestoreDebug { print("sent \(count) fish records to Firestore") }
         } else {
             if firestoreDebug { print("couldn't find user, so no upload") }
         }

@@ -3,7 +3,7 @@
 //  Log-Your-Catch
 //
 //  Created by Liam Strand on 8/5/20.
-//  Copyright © 2020 Strand. All rights reserved.
+//  Copyright © 2020-2021 Strand. All rights reserved.
 //
 
 import Foundation

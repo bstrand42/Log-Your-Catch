@@ -3,20 +3,20 @@
 //  Log-Your-Catch
 //
 //  Created by Liam Strand on 8/6/20.
-//  Copyright © 2020 Strand. All rights reserved.
+//  Copyright © 2020-2021 Strand. All rights reserved.
 //
 
 import Foundation
 
 //MARK: - Debugging
 //set to true to print debug logs
-let UIDebug = true
-let coreDataDebug = true
-let locationDebug = true
-let loginDebug = true
-let registerDebug = true
-let firestoreDebug = true
-let attemptToUploadCasesDebug = true
+let UIDebug = false
+let coreDataDebug = false
+let locationDebug = false
+let loginDebug = false
+let registerDebug = false
+let firestoreDebug = false
+let attemptToUploadCasesDebug = false
 
 //MARK: - Konstants
 
