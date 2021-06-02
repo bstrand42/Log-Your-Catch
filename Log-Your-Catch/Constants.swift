@@ -35,9 +35,8 @@ struct K {
     }
     
     struct FishType {
-        static let bluefish = "Bluefish"
-        static let striper = "Striper"
-        static let nilFish = ""
+        static let fishPickerData = ["Bluefish", "Striper", "Fluke", "Sea Bass", "Scup"]
+        static let startFish = fishPickerData[0]
     }
     
     struct FStore {

@@ -34,21 +34,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var localRecords: UILabel!
     @IBOutlet weak var logLabel: UILabel!
-    @IBOutlet weak var striperButton: UIButton!
-    @IBOutlet weak var bluefishButton: UIButton!
+    @IBOutlet weak var fishPicker: UIPickerView!
     @IBOutlet weak var mapButton: UIButton!
     
     
 //MARK: - Global Variables
     
     var len: Float = 30.0
-    var fishType = K.FishType.nilFish
+    var fishType = K.FishType.startFish
     var released = true
     var locLogging = true
     var currentLocation: CLLocation?
     var shouldSaveLocally: Bool = false
     var rstring = ""
     var date = getDate()
+    var fishPickerData: [String] = [String]()
     
     // comment one of the following two lines out.  testMode == true, writes data to different "test" Firestore collection
     let testMode: Bool = true
@@ -64,6 +64,8 @@ class ViewController: UIViewController {
         
         mapButton.isHidden = true
         
+        fishPicker.delegate = self
+        fishPicker.dataSource = self
         locationManager.delegate = self
         localDataManager.context = context
         cloudDataManager.context = context
@@ -75,7 +77,7 @@ class ViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         
         locationManager.requestLocation()
-
+        
     }
     
 //MARK:- IBActions
@@ -83,22 +85,6 @@ class ViewController: UIViewController {
     @IBAction func showCurrentLocationOnMap(_ sender: AnyObject) {
         locationManager.requestLocation()
         performSegue(withIdentifier: K.Segue.goToMapView, sender: self)
-    }
-    
-    @IBAction func striperPressed(_ sender: Any) {
-        if UIDebug { print("Striper pressed") }
-        self.fishType = K.FishType.striper
-        setAlphas(stripers: 1.0, bluefish: 0.3)
-        // clear any messages that may be lingering
-        self.logLabel.text = ""
-    }
-
-    @IBAction func bluefishPressed(_ sender: Any) {
-        if UIDebug { print("Bluefish pressed") }
-        self.fishType = K.FishType.bluefish
-        setAlphas(stripers: 0.3, bluefish: 1.0)
-        // clear any messages that may be lingering
-        self.logLabel.text = ""
     }
     
     // toggle whether location logging is desired
@@ -121,14 +107,6 @@ class ViewController: UIViewController {
     @IBAction func doneButton(_ sender: Any) {
         
         date = getDate()
-        
-        
-        if (self.fishType == K.FishType.nilFish) {
-            self.logLabel.text = "Please select species!"
-            return
-        } else {
-            if UIDebug { print("fishtype = \(self.fishType)") }
-        }
         
         /*
         if locLogging { locationManager.requestLocation() }
@@ -190,11 +168,6 @@ class ViewController: UIViewController {
         output = Float(intPart) + otherPart
         return(output)
     }
-    
-    func setAlphas (stripers striperAlpha: CGFloat, bluefish bluefishAlpha: CGFloat) {
-        striperButton.alpha = striperAlpha
-        bluefishButton.alpha = bluefishAlpha
-    }
 
 
 //MARK: - Prepare for Segues
@@ -234,6 +207,31 @@ class ViewController: UIViewController {
     @IBAction func unwindToMainViewController(_ unwindSegue: UIStoryboardSegue) {
     }
     
+}
+
+//MARK: - PickerView Delegate
+
+extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    // Number of columns of data
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // The number of rows of data
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return K.FishType.fishPickerData.count
+    }
+    
+    // Assign titles to each row of the picker from fishPickerData
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return K.FishType.fishPickerData[row]
+    }
+    
+    // Capture the picker view selection by looking back at fishPickerData
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        fishType = K.FishType.fishPickerData[row]
+    }
 }
 
 //MARK: - LocationManager Delegate

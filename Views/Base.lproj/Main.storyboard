@@ -6,6 +6,7 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -60,51 +61,23 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="pkG-vL-XcD">
                                 <rect key="frame" x="0.0" y="81" width="428" height="721"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gMh-70-NOi">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w39-Eh-E6x">
                                         <rect key="frame" x="0.0" y="0.0" width="428" height="144.33333333333334"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KMo-wm-FEI">
-                                                <rect key="frame" x="0.0" y="0.0" width="214" height="144.33333333333334"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22h-lP-TZB">
-                                                        <rect key="frame" x="75" y="52.666666666666657" width="64" height="39"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                        <state key="normal" title="Striper">
-                                                            <color key="titleColor" name="Button Color"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="striperPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="blF-7G-YJx"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
+                                            <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpD-SZ-o2c">
+                                                <rect key="frame" x="0.0" y="0.0" width="428" height="144.33333333333334"/>
                                                 <color key="backgroundColor" name="Main Background Color"/>
-                                                <constraints>
-                                                    <constraint firstItem="22h-lP-TZB" firstAttribute="centerX" secondItem="KMo-wm-FEI" secondAttribute="centerX" id="1x7-v1-Rv4"/>
-                                                    <constraint firstItem="22h-lP-TZB" firstAttribute="centerY" secondItem="KMo-wm-FEI" secondAttribute="centerY" id="gYx-5D-qqM"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpI-hE-7le">
-                                                <rect key="frame" x="214" y="0.0" width="214" height="144.33333333333334"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZi-ow-UCZ">
-                                                        <rect key="frame" x="68.666666666666686" y="52.666666666666657" width="77" height="39"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                        <state key="normal" title="Bluefish">
-                                                            <color key="titleColor" name="Button Color"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="bluefishPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Tv-X6-JwX"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
-                                                <color key="backgroundColor" name="Main Background Color"/>
-                                                <constraints>
-                                                    <constraint firstItem="dZi-ow-UCZ" firstAttribute="centerY" secondItem="hpI-hE-7le" secondAttribute="centerY" id="Pz8-Gm-hDj"/>
-                                                    <constraint firstItem="dZi-ow-UCZ" firstAttribute="centerX" secondItem="hpI-hE-7le" secondAttribute="centerX" id="mqY-ac-ZEV"/>
-                                                </constraints>
-                                            </view>
+                                                <color key="tintColor" name="Text Color"/>
+                                            </pickerView>
                                         </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="xpD-SZ-o2c" secondAttribute="trailing" id="3AF-on-z3F"/>
+                                            <constraint firstItem="xpD-SZ-o2c" firstAttribute="top" secondItem="w39-Eh-E6x" secondAttribute="top" id="QBi-8K-lmB"/>
+                                            <constraint firstAttribute="bottom" secondItem="xpD-SZ-o2c" secondAttribute="bottom" id="aEN-PX-t94"/>
+                                            <constraint firstItem="xpD-SZ-o2c" firstAttribute="leading" secondItem="w39-Eh-E6x" secondAttribute="leading" id="k2a-pH-abF"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KLM-kC-DAD">
                                         <rect key="frame" x="0.0" y="144.33333333333334" width="428" height="144.00000000000003"/>
                                         <subviews>
@@ -245,13 +218,12 @@
                         <nil key="title"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="bluefishButton" destination="dZi-ow-UCZ" id="bVu-CG-x2C"/>
+                        <outlet property="fishPicker" destination="xpD-SZ-o2c" id="1we-Wb-Ttl"/>
                         <outlet property="lenLabel" destination="UR9-RA-AY0" id="XKT-Cq-7Pr"/>
                         <outlet property="localRecords" destination="bbu-XW-zfy" id="89c-2E-1Gd"/>
                         <outlet property="logLabel" destination="OWG-Hc-owu" id="4CM-rB-NWW"/>
                         <outlet property="mapButton" destination="hkD-hn-MNL" id="4Ur-OX-7ff"/>
                         <outlet property="slider" destination="jF1-8e-vY9" id="XER-83-Mx9"/>
-                        <outlet property="striperButton" destination="22h-lP-TZB" id="iJX-hn-67c"/>
                         <segue destination="AlA-dY-rwO" kind="presentation" identifier="goToLoginView" id="bJr-dW-hck"/>
                         <segue destination="039-YI-MNG" kind="presentation" identifier="goToMapView" modalPresentationStyle="fullScreen" id="QDN-Fz-llq"/>
                     </connections>
@@ -360,7 +332,6 @@
                         <viewLayoutGuide key="safeArea" id="SlY-lD-c6z"/>
                         <color key="backgroundColor" name="Main Background Color"/>
                         <constraints>
-                            <constraint firstItem="orA-x4-KgP" firstAttribute="centerX" secondItem="FjG-Sb-pBE" secondAttribute="centerX" id="4pR-MH-tTZ"/>
                             <constraint firstItem="SlY-lD-c6z" firstAttribute="bottom" secondItem="pFr-h0-hUl" secondAttribute="bottom" constant="50" id="RUr-KO-9AH"/>
                             <constraint firstItem="SlY-lD-c6z" firstAttribute="trailing" secondItem="pFr-h0-hUl" secondAttribute="trailing" constant="50" id="aPa-Hc-baT"/>
                             <constraint firstItem="SlY-lD-c6z" firstAttribute="trailing" secondItem="orA-x4-KgP" secondAttribute="trailing" id="bFQ-aQ-c9X"/>
@@ -392,7 +363,7 @@
                                 <rect key="frame" x="0.0" y="44" width="428" height="882"/>
                                 <subviews>
                                     <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gFD-Lx-ACZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="428" height="45.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="428" height="44"/>
                                         <items>
                                             <navigationItem id="9qz-4T-Zs1">
                                                 <barButtonItem key="leftBarButtonItem" systemItem="done" id="q0W-yk-reF">
@@ -405,7 +376,7 @@
                                         </items>
                                     </navigationBar>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsPointsOfInterest="NO" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0n5-AF-f6K">
-                                        <rect key="frame" x="0.0" y="45.333333333333314" width="428" height="836.66666666666674"/>
+                                        <rect key="frame" x="0.0" y="44" width="428" height="838"/>
                                     </mapView>
                                 </subviews>
                             </stackView>
@@ -570,7 +541,6 @@
                             <constraint firstItem="L17-vg-m10" firstAttribute="leading" secondItem="5aL-E9-9JL" secondAttribute="leading" constant="50" id="9LU-af-oyO"/>
                             <constraint firstItem="5aL-E9-9JL" firstAttribute="bottom" secondItem="L17-vg-m10" secondAttribute="bottom" constant="50" id="I0I-qU-1x6"/>
                             <constraint firstItem="L17-vg-m10" firstAttribute="top" secondItem="ew6-Zf-Xdo" secondAttribute="bottom" constant="50" id="VyD-cS-sJ2"/>
-                            <constraint firstItem="ew6-Zf-Xdo" firstAttribute="centerX" secondItem="2rf-mf-o3x" secondAttribute="centerX" id="aYL-Fk-ht5"/>
                             <constraint firstItem="5aL-E9-9JL" firstAttribute="trailing" secondItem="L17-vg-m10" secondAttribute="trailing" constant="50" id="grF-WU-yFn"/>
                             <constraint firstItem="ew6-Zf-Xdo" firstAttribute="leading" secondItem="5aL-E9-9JL" secondAttribute="leading" id="hjS-yo-YVb"/>
                             <constraint firstItem="5aL-E9-9JL" firstAttribute="trailing" secondItem="ew6-Zf-Xdo" secondAttribute="trailing" id="rKY-AG-YrW"/>
@@ -608,5 +578,8 @@
         <namedColor name="Text Color">
             <color red="0.10588235294117647" green="0.14901960784313725" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
