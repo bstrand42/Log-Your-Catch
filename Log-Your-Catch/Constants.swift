@@ -10,6 +10,7 @@ import Foundation
 
 //MARK: - Debugging
 //set to true to print debug logs
+let testMode = false
 let UIDebug = false
 let coreDataDebug = false
 let locationDebug = false
@@ -35,7 +36,7 @@ struct K {
     }
     
     struct FishType {
-        static let fishPickerData = ["Bluefish", "Striper", "Fluke", "Sea Bass", "Scup"]
+        static let fishPickerData = ["Bluefish", "Striper", "Fluke", "Sea Bass", "Scup", "Sea Robin"]
         static let startFish = fishPickerData[0]
     }
     
